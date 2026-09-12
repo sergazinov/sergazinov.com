@@ -2,205 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Artyom Sergazinov's HSE Computer Science and Data Analysis journey.">
-
-    <title>HSE · KNAD | Artyom Sergazinov</title>
+    <title>sergazinov</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="site-header">
-    <a class="logo" href="/">
-        SERGAZINOV
-    </a>
+    <div class="page-shell">
 
-    <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="Toggle theme"
-        aria-pressed="false"
-    >
-        <span class="theme-icon moon">☾</span>
-        <span class="theme-icon sun">☀</span>
-        <span class="theme-thumb"></span>
-    </button>
-</header>
-
-
-<main>
-
-    <section class="hero">
-
-        <p class="eyebrow">
-            HSE · КНАД · 2026
-        </p>
-
-        <h1>
-            Computer Science<br>
-            & Data Analysis
-        </h1>
-
-        <p class="hero-text">
-            My personal student hub documenting my journey
-            through the Computer Science and Data Analysis
-            programme at HSE University.
-        </p>
-
-        <div class="hero-links">
-            <a href="#courses">Courses</a>
-            <a href="#schedule">Schedule</a>
-            <a href="#journey">Journey</a>
-        </div>
-
-    </section>
-
-
-    <section id="courses" class="section">
-
-        <div class="section-heading">
-            <p class="section-number">01</p>
-            <h2>Courses</h2>
-        </div>
-
-        <div class="course-grid">
-
-            <article class="card">
-                <p class="card-label">Programming</p>
-                <h3>C++</h3>
-                <p>
-                    Lectures, seminars, labs,
-                    practice and programming notes.
-                </p>
-                <a href="#" class="card-link">
-                    Open course →
-                </a>
-            </article>
-
-            <article class="card">
-                <p class="card-label">Mathematics</p>
-                <h3>Linear Algebra</h3>
-                <p>
-                    Matrices, vectors, systems
-                    and my course notes.
-                </p>
-                <a href="#" class="card-link">
-                    Open course →
-                </a>
-            </article>
-
-            <article class="card">
-                <p class="card-label">Mathematics</p>
-                <h3>Discrete Mathematics</h3>
-                <p>
-                    Logic, proofs, sets,
-                    relations and other topics.
-                </p>
-                <a href="#" class="card-link">
-                    Open course →
-                </a>
-            </article>
-
-            <article class="card">
-                <p class="card-label">HSE</p>
-                <h3>Russian History</h3>
-                <p>
-                    Notes, materials and coursework
-                    from the first semester.
-                </p>
-                <a href="#" class="card-link">
-                    Open course →
-                </a>
-            </article>
-
-        </div>
-
-    </section>
-
-
-    <section id="schedule" class="section">
-
-        <div class="section-heading">
-            <p class="section-number">02</p>
-            <h2>Schedule</h2>
-        </div>
-
-        <div class="wide-card">
-
-            <div>
-                <p class="card-label">
-                    Semester 1 · Module 1
-                </p>
-
-                <h3>Weekly Schedule</h3>
-
-                <p>
-                    My HSE timetable in Astana time,
-                    with classes and important academic dates.
-                </p>
-            </div>
-
-            <a href="#" class="card-link">
-                View schedule →
+        <header class="site-header">
+            <a class="site-logo" href="/" aria-label="Sergazinov home">
+                sergazinov
             </a>
 
-        </div>
+            <button
+                class="theme-toggle"
+                id="themeToggle"
+                type="button"
+                aria-label="Toggle theme"
+                aria-pressed="false"
+            >
+                <span class="theme-icon moon">☾</span>
+                <span class="theme-icon sun">☀</span>
+                <span class="theme-thumb"></span>
+            </button>
+        </header>
 
-    </section>
 
+        <main class="home-main">
 
-    <section id="journey" class="section">
+            <section class="home-hero">
 
-        <div class="section-heading">
-            <p class="section-number">03</p>
-            <h2>My HSE Journey</h2>
-        </div>
-
-        <div class="journey">
-
-            <div class="journey-date">
-                SEP<br>2026
-            </div>
-
-            <div>
-                <h3>The beginning</h3>
-
-                <p>
-                    Started studying Computer Science and
-                    Data Analysis at HSE. First lectures in
-                    C++, Linear Algebra and Discrete Mathematics.
+                <p class="hero-eyebrow">
+                    CSDA · HSE Moscow
                 </p>
+
+                <h1 class="hero-title">
+                    <span>Computer Science</span>
+                    <span class="title-connector">&amp;</span>
+                    <span>Data Analysis</span>
+                </h1>
+
+                <p class="hero-description">
+                    A personal learning hub documenting my journey through
+                    Full-Stack Development and the Computer Science &amp; Data Analysis program at HSE Moscow.
+                </p>
+
+                <nav class="hero-navigation" aria-label="Main navigation">
+                    <a href="/courses/">Courses</a>
+                    <a href="/schedule/">Schedule</a>
+                    <a href="/journey/">Journey</a>
+                </nav>
+
+            </section>
+
+        </main>
+
+
+        <footer class="site-footer">
+
+            <div class="footer-identity">
+                <span>Artyom Sergazinov</span>
+                <span class="footer-dot">·</span>
+                <span>2026</span>
             </div>
 
-        </div>
+            <a class="admin-link" href="/admin/">
+                Admin
+            </a>
 
-    </section>
+        </footer>
 
-</main>
+    </div>
 
-
-<footer>
-    <p>
-        Artyom Sergazinov · HSE КНАД
-    </p>
-
-    <a
-        href="https://github.com/sergazinov"
-        target="_blank"
-        rel="noopener noreferrer">
-        GitHub ↗
-    </a>
-</footer>
-
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
