@@ -1,0 +1,379 @@
+:root {
+    --background: #0b0b0b;
+    --surface: #141414;
+    --surface-hover: #1b1b1b;
+
+    --text: #f4f4f4;
+    --muted: #999999;
+
+    --border: #292929;
+    --accent: #ffffff;
+
+    --max-width: 1120px;
+}
+
+
+body.light {
+    --background: #f7f7f5;
+    --surface: #ffffff;
+    --surface-hover: #f0f0ed;
+
+    --text: #111111;
+    --muted: #666666;
+
+    --border: #ddddda;
+    --accent: #111111;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    margin: 0;
+
+    background: var(--background);
+    color: var(--text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    font-size: 16px;
+    line-height: 1.6;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+
+a {
+    color: inherit;
+}
+
+
+.site-header {
+    width: min(100% - 32px, var(--max-width));
+
+    margin: 0 auto;
+
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.logo {
+    text-decoration: none;
+
+    font-size: 0.8rem;
+    font-weight: 700;
+
+    letter-spacing: 0.16em;
+}
+
+
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
+    background: var(--surface);
+    color: var(--text);
+
+    cursor: pointer;
+
+    font-size: 1rem;
+}
+
+
+.theme-toggle:hover {
+    background: var(--surface-hover);
+}
+
+
+main {
+    width: min(100% - 32px, var(--max-width));
+    margin: 0 auto;
+}
+
+
+.hero {
+    padding: 52px 0 48px;
+}
+
+
+.eyebrow,
+.card-label,
+.section-number {
+    color: var(--muted);
+
+    text-transform: uppercase;
+
+    font-size: 0.72rem;
+    font-weight: 700;
+
+    letter-spacing: 0.14em;
+}
+
+
+h1 {
+    max-width: 900px;
+
+    margin: 12px 0 24px;
+
+    font-size: clamp(2.7rem, 8vw, 6.5rem);
+    line-height: 0.95;
+
+    letter-spacing: -0.055em;
+}
+
+
+.hero-text {
+    max-width: 650px;
+
+    margin-bottom: 32px;
+
+    color: var(--muted);
+
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+}
+
+
+.hero-links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+
+.hero-links a {
+    padding: 9px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    text-decoration: none;
+}
+
+
+.hero-links a:hover {
+    background: var(--surface);
+}
+
+
+.section {
+    padding: 42px 0;
+
+    border-top: 1px solid var(--border);
+}
+
+
+.section-heading {
+    margin-bottom: 28px;
+
+    display: flex;
+    align-items: baseline;
+
+    gap: 16px;
+}
+
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+
+    letter-spacing: -0.04em;
+}
+
+
+.section-number {
+    margin: 0;
+}
+
+
+.course-grid {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+}
+
+
+.card,
+.wide-card,
+.journey {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    background: var(--surface);
+}
+
+
+.card {
+    min-height: auto;
+
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    background: var(--surface-hover);
+}
+
+
+.card h3,
+.wide-card h3,
+.journey h3 {
+    margin: 5px 0 10px;
+
+    font-size: 1.35rem;
+
+    letter-spacing: -0.025em;
+}
+
+
+.card p,
+.wide-card p,
+.journey p {
+    color: var(--muted);
+}
+
+
+.card-link {
+    margin-top: auto;
+
+    text-decoration: none;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.card-link:hover {
+    text-decoration: underline;
+}
+
+
+.wide-card {
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+.journey {
+    padding: 24px;
+
+    display: grid;
+
+    grid-template-columns: 60px 1fr;
+
+    gap: 20px;
+}
+
+
+.journey-date {
+    color: var(--muted);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    letter-spacing: 0.1em;
+}
+
+
+footer {
+    width: min(100% - 32px, var(--max-width));
+
+    margin: 30px auto 0;
+
+    padding: 24px 0 42px;
+
+    border-top: 1px solid var(--border);
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color: var(--muted);
+
+    font-size: 0.8rem;
+}
+
+
+footer p {
+    margin: 0;
+}
+
+
+footer a {
+    text-decoration: none;
+}
+
+
+@media (min-width: 700px) {
+
+    .site-header,
+    main,
+    footer {
+        width: min(100% - 64px, var(--max-width));
+    }
+
+    .hero {
+        padding: 100px 0 90px;
+    }
+
+    .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wide-card {
+        flex-direction: row;
+
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+}
+
+
+@media (min-width: 1050px) {
+
+    .course-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .section {
+        padding: 72px 0;
+    }
+}
