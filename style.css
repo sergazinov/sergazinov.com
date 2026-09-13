@@ -343,7 +343,7 @@ body.light .theme-thumb {
     }
 
     .site-header {
-        min-height: 72px;
+        min-height: 60px;
     }
 
     .site-logo {
@@ -366,11 +366,12 @@ body.light .theme-thumb {
     }
 
     .home-main {
-        padding: 36px 0 42px;
+        align-items: flex-start;
+        padding: 18px 0 22px;
     }
 
     .hero-eyebrow {
-        margin-bottom: 20px;
+        margin-bottom: 14px;
     }
 
     .hero-title {
@@ -387,19 +388,19 @@ body.light .theme-thumb {
     }
 
     .hero-description {
-        margin-top: 26px;
+        margin-top: 20px;
 
         font-size: 0.94rem;
-        line-height: 1.65;
+        line-height: 1.55;
     }
 
     .hero-navigation {
         width: min(100%, 300px);
 
-        margin: 30px auto 0;
+        margin: 22px auto 0;
 
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
     }
 
     .hero-navigation a {
@@ -409,13 +410,13 @@ body.light .theme-thumb {
     }
 
     .site-footer {
-        min-height: 104px;
+        min-height: 72px;
 
-        padding: 18px 0;
+        padding: 10px 0;
 
         flex-direction: column;
         justify-content: center;
-        gap: 13px;
+        gap: 7px;
 
         text-align: center;
     }
