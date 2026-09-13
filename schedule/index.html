@@ -37,15 +37,34 @@
                 <div class="schedule-heading">
                     <div>
                         <h1 class="inner-title">Schedule</h1>
+
                         <p class="inner-description">
                             Class schedule for HSE Computing and Data Science.
                         </p>
                     </div>
 
-                    <button class="schedule-timezone" id="timezoneToggle" type="button"
-                        aria-label="Switch schedule timezone">
-                        ASTANA TIME · UTC+5
-                    </button>
+                    <div class="schedule-controls">
+
+                        <div class="current-clock">
+                            <div class="current-clock-date" id="currentDate">
+                                —
+                            </div>
+
+                            <div class="current-clock-time" id="currentTime">
+                                --:--:--
+                            </div>
+
+                            <div class="current-clock-zone" id="currentTimezone">
+                                LOCAL TIME
+                            </div>
+                        </div>
+
+                        <button class="schedule-timezone" id="timezoneToggle" type="button"
+                            aria-label="Switch schedule timezone">
+                            ASTANA TIME · UTC+5
+                        </button>
+
+                    </div>
                 </div>
 
                 <div class="group-switcher" aria-label="Select group">

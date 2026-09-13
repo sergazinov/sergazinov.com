@@ -531,6 +531,45 @@ body.light .theme-thumb {
     letter-spacing: 0.12em;
 }
 
+.schedule-controls {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 28px;
+}
+
+.current-clock {
+    text-align: right;
+}
+
+.current-clock-date {
+    color: var(--muted);
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.current-clock-time {
+    margin-top: 5px;
+
+    color: var(--accent-start);
+
+    font-size: 1.35rem;
+    font-weight: 720;
+    letter-spacing: 0.04em;
+}
+
+.current-clock-zone {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
 .schedule-timezone:hover {
     color: var(--text);
     border-color: var(--muted);
@@ -656,6 +695,17 @@ body.light .theme-thumb {
     }
 }
 
+.schedule-controls {
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.current-clock {
+    text-align: left;
+}
+
 
 /* =========================================================
    SCHEDULE — MOBILE
@@ -723,6 +773,32 @@ body.light .theme-thumb {
         margin-bottom: 12px;
         padding-bottom: 11px;
     }
+}
+
+.schedule-controls {
+    width: 100%;
+
+    gap: 12px;
+}
+
+.current-clock {
+    min-width: 0;
+}
+
+.current-clock-date {
+    font-size: 0.58rem;
+}
+
+.current-clock-time {
+    font-size: 1.15rem;
+}
+
+.current-clock-zone {
+    font-size: 0.56rem;
+}
+
+.schedule-timezone {
+    flex-shrink: 0;
 }
 
 /* ---------- CLASS SESSIONS ---------- */

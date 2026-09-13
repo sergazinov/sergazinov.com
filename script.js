@@ -91,3 +91,68 @@ if (timezoneToggle) {
         applyTimezone(newTimezone);
     });
 }
+
+const currentDateElement = document.getElementById("currentDate");
+const currentTimeElement = document.getElementById("currentTime");
+const currentTimezoneElement = document.getElementById("currentTimezone");
+
+if (
+    currentDateElement &&
+    currentTimeElement &&
+    currentTimezoneElement
+) {
+    function formatUtcOffset(date) {
+        const offsetMinutes = -date.getTimezoneOffset();
+
+        const sign = offsetMinutes >= 0 ? "+" : "-";
+
+        const absoluteMinutes = Math.abs(offsetMinutes);
+
+        const hours = Math.floor(absoluteMinutes / 60);
+        const minutes = absoluteMinutes % 60;
+
+        if (minutes === 0) {
+            return `UTC${sign}${hours}`;
+        }
+
+        return `UTC${sign}${hours}:${String(minutes).padStart(2, "0")}`;
+    }
+
+    function updateCurrentClock() {
+        const now = new Date();
+
+        const dateFormatter = new Intl.DateTimeFormat("en-US", {
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        });
+
+        const timeFormatter = new Intl.DateTimeFormat("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false
+        });
+
+        currentDateElement.textContent =
+            dateFormatter.format(now).toUpperCase();
+
+        currentTimeElement.textContent =
+            timeFormatter.format(now);
+
+        currentTimezoneElement.textContent =
+            `LOCAL · ${formatUtcOffset(now)}`;
+    }
+
+    function runClock() {
+        updateCurrentClock();
+
+        const delay =
+            1000 - new Date().getMilliseconds();
+
+        setTimeout(runClock, delay);
+    }
+
+    runClock();
+}
