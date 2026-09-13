@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,13 +19,7 @@
                 sergazinov
             </a>
 
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                type="button"
-                aria-label="Toggle theme"
-                aria-pressed="false"
-            >
+            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" aria-pressed="false">
                 <span class="theme-icon moon">☾</span>
                 <span class="theme-icon sun">☀</span>
                 <span class="theme-thumb"></span>
@@ -34,11 +29,11 @@
         <main class="inner-main">
 
             <section class="inner-page">
-                
+
                 <p class="hero-eyebrow">
                     COMPUTING AND DATA SCIENCE
                 </p>
-                
+
                 <div class="schedule-heading">
                     <div>
                         <h1 class="inner-title">Schedule</h1>
@@ -46,72 +41,215 @@
                             Class schedule for HSE Computing and Data Science.
                         </p>
                     </div>
-                    
-                    <div class="schedule-timezone">
+
+                    <button class="schedule-timezone" id="timezoneToggle" type="button"
+                        aria-label="Switch schedule timezone">
                         ASTANA TIME · UTC+5
-                    </div>
+                    </button>
                 </div>
-                
+
                 <div class="group-switcher" aria-label="Select group">
                     <button type="button">261</button>
                     <button type="button">262</button>
                     <button type="button" class="active">263</button>
                 </div>
-                
+
                 <section class="schedule-week">
                     <article class="schedule-day">
                         <div class="day-header">
                             <span>Monday</span>
                         </div>
-                        <div class="day-empty">No classes added yet</div>
+
+                        <div class="class-list">
+                            <div class="class-session">
+                                <div class="class-time">13:10–14:30</div>
+                                <div class="class-info">
+                                    <strong>Linear Algebra</strong>
+                                    <span>Lecture · Медведь Н.Ю.</span>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">18:20–19:40</div>
+                                <div class="class-info">
+                                    <strong>C++</strong>
+                                    <span>Lecture · Горденко М.К.</span>
+                                </div>
+                            </div>
+
+                        </div>
                     </article>
-                    
+
+
                     <article class="schedule-day">
                         <div class="day-header">
                             <span>Tuesday</span>
                         </div>
-                        
-                        <div class="day-empty">No classes added yet</div>
+
+                        <div class="class-list">
+
+                            <div class="class-session">
+                                <div class="class-time">11:30–12:50</div>
+                                <div class="class-info">
+                                    <strong>ОРГ</strong>
+                                    <span>Seminar · Зубков А.В.</span>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">13:10–14:30</div>
+                                <div class="class-info">
+                                    <strong>ОРГ</strong>
+                                    <span>Seminar · Зубков А.В.</span>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">15:00–16:20</div>
+                                <div class="class-info">
+                                    <strong>Discrete Mathematics</strong>
+                                    <span>Lecture · Мажуга А.М.</span>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">16:40–18:00</div>
+                                <div class="class-info">
+                                    <strong>Discrete Mathematics</strong>
+                                    <span>Seminar · Мажуга А.М.</span>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">18:20–19:40</div>
+                                <div class="class-info">
+                                    <strong>Russian History</strong>
+                                    <span>Seminar · Лупарёва Н.Н.</span>
+                                </div>
+                            </div>
+
+                        </div>
                     </article>
-                    
+
+
                     <article class="schedule-day">
                         <div class="day-header">
                             <span>Wednesday</span>
                         </div>
-                        
-                        <div class="day-empty">No classes added yet</div>
+
+                        <div class="class-list">
+
+                            <div class="class-session">
+                                <div class="class-time">13:10–14:30</div>
+                                <div class="class-info">
+                                    <strong>C++</strong>
+                                    <span>Seminar · Савищенко В.Р.</span>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">16:40–18:00</div>
+                                <div class="class-info">
+                                    <strong>C++</strong>
+                                    <span>Lecture · Горденко М.К.</span>
+                                </div>
+                            </div>
+
+                        </div>
                     </article>
-                    
+
+
                     <article class="schedule-day">
                         <div class="day-header">
                             <span>Thursday</span>
                         </div>
-                        <div class="day-empty">No classes added yet</div>
+
+                        <div class="day-empty">
+                            Free day
+                        </div>
                     </article>
-                    
+
+
                     <article class="schedule-day">
                         <div class="day-header">
                             <span>Friday</span>
                         </div>
-                        <div class="day-empty">No classes added yet</div>
+
+                        <div class="class-list">
+
+                            <div class="class-session">
+                                <div class="class-time">11:30–12:50</div>
+                                <div class="class-info">
+                                    <strong>English</strong>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">13:10–14:30</div>
+                                <div class="class-info">
+                                    <strong>English</strong>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">15:00–16:20</div>
+                                <div class="class-info">
+                                    <strong>C++</strong>
+                                    <span>Seminar · Савищенко В.Р.</span>
+                                </div>
+                            </div>
+
+                        </div>
                     </article>
-                    
+
+
                     <article class="schedule-day">
                         <div class="day-header">
                             <span>Saturday</span>
                         </div>
-                        <div class="day-empty">No classes added yet</div>
+
+                        <div class="class-list">
+
+                            <div class="class-session">
+                                <div class="class-time">13:10–14:30</div>
+                                <div class="class-info">
+                                    <strong>Linear Algebra</strong>
+                                    <span>Seminar · Егорова А.Н.</span>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">15:00–16:20</div>
+                                <div class="class-info">
+                                    <strong>Discrete Mathematics</strong>
+                                    <span>Lecture · Мажуга А.М.</span>
+                                </div>
+                            </div>
+
+                            <div class="class-session">
+                                <div class="class-time">16:40–18:00</div>
+                                <div class="class-info">
+                                    <strong>Discrete Mathematics</strong>
+                                    <span>Seminar · Мажуга А.М.</span>
+                                </div>
+                            </div>
+
+                        </div>
                     </article>
-                    
+
+
                     <article class="schedule-day">
                         <div class="day-header">
                             <span>Sunday</span>
                         </div>
-                        <div class="day-empty">Free day</div>
+
+                        <div class="day-empty">
+                            Free day
+                        </div>
                     </article>
-                
+
                 </section>
-            
+
             </section>
 
         </main>
@@ -135,4 +273,5 @@
     <script src="../script.js"></script>
 
 </body>
+
 </html>

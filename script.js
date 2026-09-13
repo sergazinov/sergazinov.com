@@ -16,3 +16,78 @@ themeToggle.addEventListener("click", () => {
     localStorage.setItem("theme", isLight ? "light" : "dark");
     themeToggle.setAttribute("aria-pressed", isLight ? "true" : "false");
 });
+
+const timezoneToggle = document.getElementById("timezoneToggle");
+
+if (timezoneToggle) {
+    const classTimes = document.querySelectorAll(".class-time");
+
+    classTimes.forEach((timeElement) => {
+        timeElement.dataset.astanaTime = timeElement.textContent.trim();
+    });
+
+    function shiftTime(time, minutesToAdd) {
+        const [hours, minutes] = time.split(":").map(Number);
+
+        let totalMinutes = hours * 60 + minutes + minutesToAdd;
+
+        totalMinutes = ((totalMinutes % 1440) + 1440) % 1440;
+
+        const newHours = Math.floor(totalMinutes / 60);
+        const newMinutes = totalMinutes % 60;
+
+        return `${String(newHours).padStart(2, "0")}:${String(newMinutes).padStart(2, "0")}`;
+    }
+
+    function convertTimeRange(timeRange, timezone) {
+        const match = timeRange.match(
+            /(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})/
+        );
+
+        if (!match) {
+            return timeRange;
+        }
+
+        const [, startTime, endTime] = match;
+
+        if (timezone === "moscow") {
+            return `${shiftTime(startTime, -120)}–${shiftTime(endTime, -120)}`;
+        }
+
+        return `${startTime}–${endTime}`;
+    }
+
+    function applyTimezone(timezone) {
+        classTimes.forEach((timeElement) => {
+            const astanaTime = timeElement.dataset.astanaTime;
+
+            timeElement.textContent = convertTimeRange(
+                astanaTime,
+                timezone
+            );
+        });
+
+        if (timezone === "moscow") {
+            timezoneToggle.textContent = "MOSCOW TIME · UTC+3";
+        } else {
+            timezoneToggle.textContent = "ASTANA TIME · UTC+5";
+        }
+
+        localStorage.setItem("scheduleTimezone", timezone);
+    }
+
+    const savedTimezone =
+        localStorage.getItem("scheduleTimezone") || "astana";
+
+    applyTimezone(savedTimezone);
+
+    timezoneToggle.addEventListener("click", () => {
+        const currentTimezone =
+            localStorage.getItem("scheduleTimezone") || "astana";
+
+        const newTimezone =
+            currentTimezone === "astana" ? "moscow" : "astana";
+
+        applyTimezone(newTimezone);
+    });
+}
