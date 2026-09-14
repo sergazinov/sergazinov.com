@@ -8,6 +8,7 @@ require_once dirname(__DIR__, 2) . '/src/deadlines.php';
 
 $deadlines = getPublishedDeadlines($pdo);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +26,7 @@ $deadlines = getPublishedDeadlines($pdo);
     <div class="page-shell">
 
         <header class="site-header">
+
             <a class="site-logo" href="/" aria-label="Sergazinov home">
                 sergazinov
             </a>
@@ -40,7 +42,9 @@ $deadlines = getPublishedDeadlines($pdo);
                 <span class="theme-icon sun">☀</span>
                 <span class="theme-thumb"></span>
             </button>
+
         </header>
+
 
         <main class="inner-main">
 
@@ -58,11 +62,27 @@ $deadlines = getPublishedDeadlines($pdo);
                     Upcoming coursework and submission deadlines.
                 </p>
 
+
+                <div class="deadlines-toolbar">
+
+                    <button
+                        class="schedule-timezone"
+                        id="timezoneToggle"
+                        type="button"
+                        aria-label="Switch deadline timezone"
+                    >
+                        ASTANA TIME · UTC+5
+                    </button>
+
+                </div>
+
+
                 <section class="deadlines-list">
 
                     <?php if ($deadlines === []): ?>
 
                         <div class="deadlines-empty">
+
                             <p class="deadlines-empty-title">
                                 No deadlines yet.
                             </p>
@@ -70,6 +90,7 @@ $deadlines = getPublishedDeadlines($pdo);
                             <p class="deadlines-empty-text">
                                 Upcoming deadlines will appear here.
                             </p>
+
                         </div>
 
                     <?php else: ?>
@@ -80,8 +101,7 @@ $deadlines = getPublishedDeadlines($pdo);
 
                                 <div class="deadline-course">
                                     <?= htmlspecialchars(
-                                        $deadline['course_short_name']
-                                        ?: $deadline['course_name'],
+                                        $deadline['course_short_name'] ?: $deadline['course_name'],
                                         ENT_QUOTES,
                                         'UTF-8'
                                     ) ?>
@@ -107,20 +127,46 @@ $deadlines = getPublishedDeadlines($pdo);
 
                                 <?php endif; ?>
 
-                                <time
-                                    class="deadline-time"
-                                    datetime="<?= htmlspecialchars(
+
+                                <div
+                                    class="deadline-meta"
+                                    data-deadline
+                                    data-due-at="<?= htmlspecialchars(
                                         $deadline['due_at_utc'],
                                         ENT_QUOTES,
                                         'UTF-8'
                                     ) ?>"
                                 >
-                                    <?= htmlspecialchars(
-                                        $deadline['due_at_utc'],
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>
-                                </time>
+
+                                    <div class="deadline-date-label">
+                                        Deadline
+                                    </div>
+
+                                    <time
+                                        class="deadline-time"
+                                        datetime="<?= htmlspecialchars(
+                                            $deadline['due_at_utc'],
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        ) ?>"
+                                    >
+                                        —
+                                    </time>
+
+
+                                    <div class="deadline-countdown">
+
+                                        <span class="deadline-countdown-label">
+                                            Due in
+                                        </span>
+
+                                        <strong class="deadline-countdown-value">
+                                            —
+                                        </strong>
+
+                                    </div>
+
+                                </div>
 
                             </article>
 
@@ -133,6 +179,7 @@ $deadlines = getPublishedDeadlines($pdo);
             </section>
 
         </main>
+
 
         <footer class="site-footer">
 
@@ -149,6 +196,7 @@ $deadlines = getPublishedDeadlines($pdo);
         </footer>
 
     </div>
+
 
     <script src="../script.js"></script>
 
