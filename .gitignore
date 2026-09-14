@@ -1,0 +1,19 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Composer dependencies
+/vendor/
+
+# SQLite databases
+/storage/*.sqlite
+/storage/*.sqlite3
+/storage/*.db
+
+# Runtime files
+/storage/*.log
+
+# OS / editor files
+.DS_Store
+Thumbs.db
