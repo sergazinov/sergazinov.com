@@ -865,3 +865,99 @@ body.light .theme-thumb {
         font-size: 0.72rem;
     }
 }
+
+/* =========================================================
+   DEADLINES PAGE
+   ========================================================= */
+
+.deadlines-list {
+    margin-top: 40px;
+}
+
+.deadlines-empty {
+    padding: 36px;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: var(--surface);
+}
+
+.deadlines-empty-title {
+    margin: 0;
+
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.deadlines-empty-text {
+    margin: 8px 0 0;
+
+    color: var(--muted);
+
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.deadline-card {
+    padding: 22px;
+
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    background: var(--surface);
+}
+
+.deadline-card+.deadline-card {
+    margin-top: 12px;
+}
+
+.deadline-course {
+    color: var(--muted);
+
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.deadline-title {
+    margin: 10px 0 0;
+
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.deadline-description {
+    margin: 10px 0 0;
+
+    color: var(--muted);
+
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.deadline-time {
+    display: block;
+
+    margin-top: 18px;
+
+    color: var(--accent-start);
+
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 560px) {
+
+    .deadlines-list {
+        margin-top: 28px;
+    }
+
+    .deadlines-empty,
+    .deadline-card {
+        padding: 18px;
+        border-radius: 15px;
+    }
+}
