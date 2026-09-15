@@ -1,84 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>sergazinov</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-
+  <body>
     <div class="page-shell">
+      <header class="site-header">
+        <a
+          class="site-logo"
+          href="/"
+          aria-label="Sergazinov home"
+          data-i18n-aria-label="header.homeLabel"
+        >
+          sergazinov
+        </a>
 
-        <header class="site-header">
-            <a class="site-logo" href="/" aria-label="Sergazinov home">
-                sergazinov
-            </a>
+        <div class="header-controls">
+          <div
+            class="language-switcher"
+            role="group"
+            aria-label="Language"
+            data-i18n-aria-label="header.languageLabel"
+          >
+            <button
+              class="language-option is-active"
+              type="button"
+              data-language="en"
+              aria-pressed="true"
+            >
+              EN
+            </button>
+
+            <span class="language-divider">/</span>
 
             <button
-                class="theme-toggle"
-                id="themeToggle"
-                type="button"
-                aria-label="Toggle theme"
-                aria-pressed="false"
+              class="language-option"
+              type="button"
+              data-language="ru"
+              aria-pressed="false"
             >
-                <span class="theme-icon moon">☾</span>
-                <span class="theme-icon sun">☀</span>
-                <span class="theme-thumb"></span>
+              RU
             </button>
-        </header>
+          </div>
 
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Toggle theme"
+            aria-pressed="false"
+            data-i18n-aria-label="header.themeLabel"
+          >
+            <span class="theme-icon moon">☾</span>
+            <span class="theme-icon sun">☀</span>
+            <span class="theme-thumb"></span>
+          </button>
+        </div>
+      </header>
 
-        <main class="home-main">
+      <main class="home-main">
+        <section class="home-hero">
+          <p class="hero-eyebrow" data-i18n="home.eyebrow">CDS · HSE Moscow</p>
 
-            <section class="home-hero">
+          <h1 class="hero-title">
+            <span data-i18n="home.titleFirst"> Computing </span>
 
-                <p class="hero-eyebrow">
-                    CDS · HSE Moscow
-                </p>
+            <span class="title-connector">&amp;</span>
 
-                <h1 class="hero-title">
-                    <span>Computing</span>
-                    <span class="title-connector">&amp;</span>
-                    <span>Data Science</span>
-                </h1>
+            <span data-i18n="home.titleSecond"> Data Science </span>
+          </h1>
 
-                <p class="hero-description">
-                    A personal learning hub documenting my journey through
-                    Full-Stack Development and the Computing &amp; Data Science program at HSE Moscow.
-                </p>
+          <p class="hero-description" data-i18n="home.description">
+            A personal learning hub documenting my journey through Full-Stack
+            Development and the Computing &amp; Data Science program at HSE
+            Moscow.
+          </p>
 
-                <nav class="hero-navigation" aria-label="Main navigation">
-                    <a href="/courses/">Courses</a>
-                    <a href="/schedule/">Schedule</a>
-                    <a href="/deadlines/">Deadlines</a>
-                </nav>
+          <nav
+            class="hero-navigation"
+            aria-label="Main navigation"
+            data-i18n-aria-label="home.navigationLabel"
+          >
+            <a href="/courses/" data-i18n="nav.courses"> Courses </a>
 
-            </section>
+            <a href="/schedule/" data-i18n="nav.schedule"> Schedule </a>
 
-        </main>
+            <a href="/deadlines/" data-i18n="nav.deadlines"> Deadlines </a>
+          </nav>
+        </section>
+      </main>
 
+      <footer class="site-footer">
+        <div class="footer-identity">
+          <span>Artyom Sergazinov</span>
+          <span class="footer-dot">·</span>
+          <span>2026</span>
+        </div>
 
-        <footer class="site-footer">
-
-            <div class="footer-identity">
-                <span>Artyom Sergazinov</span>
-                <span class="footer-dot">·</span>
-                <span>2026</span>
-            </div>
-
-            <a class="admin-link" href="/admin/">
-                Admin
-            </a>
-
-        </footer>
-
+        <a class="admin-link" href="/admin/" data-i18n="nav.admin"> Admin </a>
+      </footer>
     </div>
 
     <script src="script.js"></script>
-
-</body>
+  </body>
 </html>

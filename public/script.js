@@ -19,6 +19,18 @@ themeToggle.addEventListener("click", () => {
 
 const timezoneToggle = document.getElementById("timezoneToggle");
 
+function getSiteLanguage() {
+  return localStorage.getItem("siteLanguage") === "ru" ? "ru" : "en";
+}
+
+function getScheduleTimezoneLabel(timezone, language = getSiteLanguage()) {
+  if (timezone === "moscow") {
+    return language === "ru" ? "МОСКВА · UTC+3" : "MOSCOW TIME · UTC+3";
+  }
+
+  return language === "ru" ? "АСТАНА · UTC+5" : "ASTANA TIME · UTC+5";
+}
+
 if (timezoneToggle) {
   const classTimes = document.querySelectorAll(".class-time");
 
@@ -62,11 +74,7 @@ if (timezoneToggle) {
       timeElement.textContent = convertTimeRange(astanaTime, timezone);
     });
 
-    if (timezone === "moscow") {
-      timezoneToggle.textContent = "MOSCOW TIME · UTC+3";
-    } else {
-      timezoneToggle.textContent = "ASTANA TIME · UTC+5";
-    }
+    timezoneToggle.textContent = getScheduleTimezoneLabel(timezone);
 
     localStorage.setItem("scheduleTimezone", timezone);
   }
@@ -110,7 +118,11 @@ if (currentDateElement && currentTimeElement && currentTimezoneElement) {
   function updateCurrentClock() {
     const now = new Date();
 
-    const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    const language = getSiteLanguage();
+
+    const dateLocale = language === "ru" ? "ru-RU" : "en-US";
+
+    const dateFormatter = new Intl.DateTimeFormat(dateLocale, {
       weekday: "short",
       month: "short",
       day: "numeric",
@@ -128,7 +140,9 @@ if (currentDateElement && currentTimeElement && currentTimezoneElement) {
 
     currentTimeElement.textContent = timeFormatter.format(now);
 
-    currentTimezoneElement.textContent = `LOCAL · ${formatUtcOffset(now)}`;
+    const localLabel = language === "ru" ? "МЕСТНОЕ" : "LOCAL";
+
+    currentTimezoneElement.textContent = `${localLabel} · ${formatUtcOffset(now)}`;
   }
 
   function runClock() {
@@ -168,7 +182,10 @@ if (deadlineElements.length > 0) {
   function formatDeadlineDate(date, timezone) {
     const settings = deadlineTimezones[timezone];
 
-    const parts = new Intl.DateTimeFormat("en-GB", {
+    const language = getSiteLanguage();
+    const locale = language === "ru" ? "ru-RU" : "en-GB";
+
+    const parts = new Intl.DateTimeFormat(locale, {
       timeZone: settings.zone,
       day: "2-digit",
       month: "short",
@@ -194,8 +211,10 @@ if (deadlineElements.length > 0) {
   }
 
   function formatCountdown(milliseconds) {
+    const language = getSiteLanguage();
+
     if (milliseconds <= 0) {
-      return "DEADLINE PASSED";
+      return language === "ru" ? "СРОК ИСТЁК" : "DEADLINE PASSED";
     }
 
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -205,16 +224,31 @@ if (deadlineElements.length > 0) {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
+    const units =
+      language === "ru"
+        ? {
+            day: "Д",
+            hour: "Ч",
+            minute: "М",
+            second: "С",
+          }
+        : {
+            day: "D",
+            hour: "H",
+            minute: "M",
+            second: "S",
+          };
+
     const parts = [];
 
     if (days > 0) {
-      parts.push(`${days}D`);
+      parts.push(`${days}${units.day}`);
     }
 
     parts.push(
-      `${String(hours).padStart(2, "0")}H`,
-      `${String(minutes).padStart(2, "0")}M`,
-      `${String(seconds).padStart(2, "0")}S`,
+      `${String(hours).padStart(2, "0")}${units.hour}`,
+      `${String(minutes).padStart(2, "0")}${units.minute}`,
+      `${String(seconds).padStart(2, "0")}${units.second}`,
     );
 
     return parts.join(" · ");
@@ -249,3 +283,183 @@ if (deadlineElements.length > 0) {
     deadlineTimezoneToggle.addEventListener("click", updateDeadlineDisplay);
   }
 }
+
+const translations = {
+  en: {
+    "header.homeLabel": "Sergazinov home",
+    "header.languageLabel": "Language",
+    "header.themeLabel": "Toggle theme",
+
+    "home.eyebrow": "CDS · HSE Moscow",
+    "home.titleFirst": "Computing",
+    "home.titleSecond": "Data Science",
+    "home.description":
+      "A personal learning hub documenting my journey through Full-Stack Development and the Computing & Data Science program at HSE Moscow.",
+    "home.navigationLabel": "Main navigation",
+
+    "nav.courses": "Courses",
+    "nav.schedule": "Schedule",
+    "nav.deadlines": "Deadlines",
+    "nav.admin": "Admin",
+    "schedule.pageTitle": "Schedule · Sergazinov",
+    "schedule.eyebrow": "COMPUTING AND DATA SCIENCE",
+    "schedule.title": "Schedule",
+    "schedule.description":
+      "Class schedule for HSE Computing and Data Science.",
+    "schedule.localTime": "LOCAL TIME",
+    "schedule.timezoneLabel": "Switch schedule timezone",
+    "schedule.groupLabel": "Select group",
+    "schedule.freeDay": "Free day",
+
+    "day.monday": "Monday",
+    "day.tuesday": "Tuesday",
+    "day.wednesday": "Wednesday",
+    "day.thursday": "Thursday",
+    "day.friday": "Friday",
+    "day.saturday": "Saturday",
+    "day.sunday": "Sunday",
+
+    "class.lecture": "Lecture",
+    "class.seminar": "Seminar",
+
+    "course.linearAlgebra": "Linear Algebra",
+    "course.discreteMath": "Discrete Mathematics",
+    "course.russianHistory": "Russian History",
+    "course.statehood": "Russian Statehood",
+    "course.english": "English",
+    "deadlines.pageTitle": "Deadlines · Sergazinov",
+    "deadlines.eyebrow": "COMPUTING AND DATA SCIENCE",
+    "deadlines.title": "Deadlines",
+    "deadlines.description": "Upcoming coursework and submission deadlines.",
+    "deadlines.timezoneLabel": "Switch deadline timezone",
+    "deadlines.emptyTitle": "No deadlines yet.",
+    "deadlines.emptyText": "Upcoming deadlines will appear here.",
+    "deadlines.deadlineLabel": "Deadline",
+    "deadlines.dueIn": "Due in",
+  },
+
+  ru: {
+    "header.homeLabel": "Главная страница Sergazinov",
+    "header.languageLabel": "Язык",
+    "header.themeLabel": "Переключить тему",
+
+    "home.eyebrow": "КНАД · НИУ ВШЭ, Москва",
+    "home.titleFirst": "Компьютерные науки",
+    "home.titleSecond": "Анализ данных",
+    "home.description":
+      "Мой учебный проект о Full-Stack разработке и обучении на программе «Компьютерные науки и анализ данных» в НИУ ВШЭ.",
+    "home.navigationLabel": "Основная навигация",
+
+    "nav.courses": "Курсы",
+    "nav.schedule": "Расписание",
+    "nav.deadlines": "Дедлайны",
+    "nav.admin": "Админ",
+    "schedule.pageTitle": "Расписание · Sergazinov",
+    "schedule.eyebrow": "КНАД · НИУ ВШЭ, МОСКВА",
+    "schedule.title": "Расписание",
+    "schedule.description":
+      "Расписание занятий программы «Компьютерные науки и анализ данных» НИУ ВШЭ.",
+    "schedule.localTime": "МЕСТНОЕ ВРЕМЯ",
+    "schedule.timezoneLabel": "Переключить часовой пояс расписания",
+    "schedule.groupLabel": "Выбрать группу",
+    "schedule.freeDay": "Свободный день",
+
+    "day.monday": "Понедельник",
+    "day.tuesday": "Вторник",
+    "day.wednesday": "Среда",
+    "day.thursday": "Четверг",
+    "day.friday": "Пятница",
+    "day.saturday": "Суббота",
+    "day.sunday": "Воскресенье",
+
+    "class.lecture": "Лекция",
+    "class.seminar": "Семинар",
+
+    "course.linearAlgebra": "Линейная алгебра",
+    "course.discreteMath": "Дискретная математика",
+    "course.russianHistory": "История России",
+    "course.statehood": "ОРГ",
+    "course.english": "Английский язык",
+    "deadlines.pageTitle": "Дедлайны · Sergazinov",
+    "deadlines.eyebrow": "КНАД · НИУ ВШЭ, МОСКВА",
+    "deadlines.title": "Дедлайны",
+    "deadlines.description": "Предстоящие учебные задания и сроки сдачи.",
+    "deadlines.timezoneLabel": "Переключить часовой пояс дедлайнов",
+    "deadlines.emptyTitle": "Дедлайнов пока нет.",
+    "deadlines.emptyText": "Предстоящие дедлайны появятся здесь.",
+    "deadlines.deadlineLabel": "Дедлайн",
+    "deadlines.dueIn": "Осталось",
+  },
+};
+
+const languageButtons = document.querySelectorAll("[data-language]");
+
+function getCurrentLanguage() {
+  const savedLanguage = localStorage.getItem("siteLanguage");
+
+  return savedLanguage === "ru" ? "ru" : "en";
+}
+
+const courseTranslationKeys = {
+  "linear-algebra": "course.linearAlgebra",
+  "discrete-mathematics": "course.discreteMath",
+  "russian-history": "course.russianHistory",
+  "russian-statehood": "course.statehood",
+  english: "course.english",
+};
+
+function applyLanguage(language) {
+  const dictionary = translations[language];
+
+  document.documentElement.lang = language;
+
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const key = element.dataset.i18n;
+
+    if (dictionary[key]) {
+      element.textContent = dictionary[key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-course]").forEach((element) => {
+    const slug = element.dataset.i18nCourse;
+    const key = courseTranslationKeys[slug];
+
+    if (key && dictionary[key]) {
+      element.textContent = dictionary[key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+    const key = element.dataset.i18nAriaLabel;
+
+    if (dictionary[key]) {
+      element.setAttribute("aria-label", dictionary[key]);
+    }
+  });
+
+  languageButtons.forEach((button) => {
+    const isActive = button.dataset.language === language;
+
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  localStorage.setItem("siteLanguage", language);
+  if (timezoneToggle) {
+    const timezone =
+      localStorage.getItem("scheduleTimezone") === "moscow"
+        ? "moscow"
+        : "astana";
+
+    timezoneToggle.textContent = getScheduleTimezoneLabel(timezone, language);
+  }
+}
+
+languageButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    applyLanguage(button.dataset.language);
+  });
+});
+
+applyLanguage(getCurrentLanguage());

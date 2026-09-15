@@ -993,3 +993,70 @@ body.light .theme-thumb {
     font-size: 1rem;
   }
 }
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 7px 10px;
+
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  background: var(--surface);
+}
+
+.language-option {
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: var(--muted);
+
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    opacity 160ms ease;
+}
+
+.language-option:hover {
+  color: var(--text);
+}
+
+.language-option.is-active {
+  color: var(--accent-start);
+}
+
+.language-divider {
+  color: var(--border);
+  font-size: 0.7rem;
+  user-select: none;
+}
+
+@media (max-width: 560px) {
+  .header-controls {
+    gap: 8px;
+  }
+
+  .language-switcher {
+    padding: 6px 8px;
+  }
+
+  .language-option {
+    font-size: 0.62rem;
+  }
+}
