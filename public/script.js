@@ -19,6 +19,18 @@ themeToggle.addEventListener("click", () => {
 
 const timezoneToggle = document.getElementById("timezoneToggle");
 
+function getSiteLanguage() {
+  return localStorage.getItem("siteLanguage") === "ru" ? "ru" : "en";
+}
+
+function getScheduleTimezoneLabel(timezone, language = getSiteLanguage()) {
+  if (timezone === "moscow") {
+    return language === "ru" ? "МОСКВА · UTC+3" : "MOSCOW TIME · UTC+3";
+  }
+
+  return language === "ru" ? "АСТАНА · UTC+5" : "ASTANA TIME · UTC+5";
+}
+
 if (timezoneToggle) {
   const classTimes = document.querySelectorAll(".class-time");
 
@@ -62,11 +74,7 @@ if (timezoneToggle) {
       timeElement.textContent = convertTimeRange(astanaTime, timezone);
     });
 
-    if (timezone === "moscow") {
-      timezoneToggle.textContent = "MOSCOW TIME · UTC+3";
-    } else {
-      timezoneToggle.textContent = "ASTANA TIME · UTC+5";
-    }
+    timezoneToggle.textContent = getScheduleTimezoneLabel(timezone);
 
     localStorage.setItem("scheduleTimezone", timezone);
   }
@@ -110,7 +118,11 @@ if (currentDateElement && currentTimeElement && currentTimezoneElement) {
   function updateCurrentClock() {
     const now = new Date();
 
-    const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    const language = getSiteLanguage();
+
+    const dateLocale = language === "ru" ? "ru-RU" : "en-US";
+
+    const dateFormatter = new Intl.DateTimeFormat(dateLocale, {
       weekday: "short",
       month: "short",
       day: "numeric",
@@ -128,7 +140,9 @@ if (currentDateElement && currentTimeElement && currentTimezoneElement) {
 
     currentTimeElement.textContent = timeFormatter.format(now);
 
-    currentTimezoneElement.textContent = `LOCAL · ${formatUtcOffset(now)}`;
+    const localLabel = language === "ru" ? "МЕСТНОЕ" : "LOCAL";
+
+    currentTimezoneElement.textContent = `${localLabel} · ${formatUtcOffset(now)}`;
   }
 
   function runClock() {
@@ -267,6 +281,32 @@ const translations = {
     "nav.schedule": "Schedule",
     "nav.deadlines": "Deadlines",
     "nav.admin": "Admin",
+    "schedule.pageTitle": "Schedule · Sergazinov",
+    "schedule.eyebrow": "COMPUTING AND DATA SCIENCE",
+    "schedule.title": "Schedule",
+    "schedule.description":
+      "Class schedule for HSE Computing and Data Science.",
+    "schedule.localTime": "LOCAL TIME",
+    "schedule.timezoneLabel": "Switch schedule timezone",
+    "schedule.groupLabel": "Select group",
+    "schedule.freeDay": "Free day",
+
+    "day.monday": "Monday",
+    "day.tuesday": "Tuesday",
+    "day.wednesday": "Wednesday",
+    "day.thursday": "Thursday",
+    "day.friday": "Friday",
+    "day.saturday": "Saturday",
+    "day.sunday": "Sunday",
+
+    "class.lecture": "Lecture",
+    "class.seminar": "Seminar",
+
+    "course.linearAlgebra": "Linear Algebra",
+    "course.discreteMath": "Discrete Mathematics",
+    "course.russianHistory": "Russian History",
+    "course.statehood": "Russian Statehood",
+    "course.english": "English",
   },
 
   ru: {
@@ -285,6 +325,32 @@ const translations = {
     "nav.schedule": "Расписание",
     "nav.deadlines": "Дедлайны",
     "nav.admin": "Админ",
+    "schedule.pageTitle": "Расписание · Sergazinov",
+    "schedule.eyebrow": "КНАД · НИУ ВШЭ, МОСКВА",
+    "schedule.title": "Расписание",
+    "schedule.description":
+      "Расписание занятий программы «Компьютерные науки и анализ данных» НИУ ВШЭ.",
+    "schedule.localTime": "МЕСТНОЕ ВРЕМЯ",
+    "schedule.timezoneLabel": "Переключить часовой пояс расписания",
+    "schedule.groupLabel": "Выбрать группу",
+    "schedule.freeDay": "Свободный день",
+
+    "day.monday": "Понедельник",
+    "day.tuesday": "Вторник",
+    "day.wednesday": "Среда",
+    "day.thursday": "Четверг",
+    "day.friday": "Пятница",
+    "day.saturday": "Суббота",
+    "day.sunday": "Воскресенье",
+
+    "class.lecture": "Лекция",
+    "class.seminar": "Семинар",
+
+    "course.linearAlgebra": "Линейная алгебра",
+    "course.discreteMath": "Дискретная математика",
+    "course.russianHistory": "История России",
+    "course.statehood": "ОРГ",
+    "course.english": "Английский язык",
   },
 };
 
@@ -325,6 +391,14 @@ function applyLanguage(language) {
   });
 
   localStorage.setItem("siteLanguage", language);
+  if (timezoneToggle) {
+    const timezone =
+      localStorage.getItem("scheduleTimezone") === "moscow"
+        ? "moscow"
+        : "astana";
+
+    timezoneToggle.textContent = getScheduleTimezoneLabel(timezone, language);
+  }
 }
 
 languageButtons.forEach((button) => {

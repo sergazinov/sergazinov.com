@@ -1,296 +1,395 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="schedule.pageTitle">Schedule · Sergazinov</title>
 
-    <title>Schedule · Sergazinov</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
 
-    <link rel="stylesheet" href="../style.css">
-</head>
-
-<body>
-
+  <body>
     <div class="page-shell">
+      <header class="site-header">
+        <a
+          class="site-logo"
+          href="/"
+          aria-label="Sergazinov home"
+          data-i18n-aria-label="header.homeLabel"
+        >
+          sergazinov
+        </a>
 
-        <header class="site-header">
-            <a class="site-logo" href="/">
-                sergazinov
-            </a>
-
-            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme" aria-pressed="false">
-                <span class="theme-icon moon">☾</span>
-                <span class="theme-icon sun">☀</span>
-                <span class="theme-thumb"></span>
+        <div class="header-controls">
+          <div
+            class="language-switcher"
+            role="group"
+            aria-label="Language"
+            data-i18n-aria-label="header.languageLabel"
+          >
+            <button
+              class="language-option is-active"
+              type="button"
+              data-language="en"
+              aria-pressed="true"
+            >
+              EN
             </button>
-        </header>
 
-        <main class="inner-main">
+            <span class="language-divider">/</span>
 
-            <section class="inner-page">
+            <button
+              class="language-option"
+              type="button"
+              data-language="ru"
+              aria-pressed="false"
+            >
+              RU
+            </button>
+          </div>
 
-                <p class="hero-eyebrow">
-                    COMPUTING AND DATA SCIENCE
-                </p>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Toggle theme"
+            aria-pressed="false"
+            data-i18n-aria-label="header.themeLabel"
+          >
+            <span class="theme-icon moon">☾</span>
+            <span class="theme-icon sun">☀</span>
+            <span class="theme-thumb"></span>
+          </button>
+        </div>
+      </header>
 
-                <div class="schedule-heading">
-                    <div>
-                        <h1 class="inner-title">Schedule</h1>
+      <main class="inner-main">
+        <section class="inner-page">
+          <p class="hero-eyebrow" data-i18n="schedule.eyebrow">
+            COMPUTING AND DATA SCIENCE
+          </p>
 
-                        <p class="inner-description">
-                            Class schedule for HSE Computing and Data Science.
-                        </p>
-                    </div>
+          <div class="schedule-heading">
+            <div>
+              <h1 class="inner-title" data-i18n="schedule.title">Schedule</h1>
 
-                    <div class="schedule-controls">
-
-                        <div class="current-clock">
-                            <div class="current-clock-date" id="currentDate">
-                                —
-                            </div>
-
-                            <div class="current-clock-time" id="currentTime">
-                                --:--:--
-                            </div>
-
-                            <div class="current-clock-zone" id="currentTimezone">
-                                LOCAL TIME
-                            </div>
-                        </div>
-
-                        <button class="schedule-timezone" id="timezoneToggle" type="button"
-                            aria-label="Switch schedule timezone">
-                            ASTANA TIME · UTC+5
-                        </button>
-
-                    </div>
-                </div>
-
-                <div class="group-switcher" aria-label="Select group">
-                    <button type="button">261</button>
-                    <button type="button">262</button>
-                    <button type="button" class="active">263</button>
-                </div>
-
-                <section class="schedule-week">
-                    <article class="schedule-day">
-                        <div class="day-header">
-                            <span>Monday</span>
-                        </div>
-
-                        <div class="class-list">
-                            <div class="class-session">
-                                <div class="class-time">13:10–14:30</div>
-                                <div class="class-info">
-                                    <strong>Linear Algebra</strong>
-                                    <span>Lecture · Медведь Н.Ю.</span>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">18:20–19:40</div>
-                                <div class="class-info">
-                                    <strong>C++</strong>
-                                    <span>Lecture · Горденко М.К.</span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </article>
-
-
-                    <article class="schedule-day">
-                        <div class="day-header">
-                            <span>Tuesday</span>
-                        </div>
-
-                        <div class="class-list">
-
-                            <div class="class-session">
-                                <div class="class-time">11:30–12:50</div>
-                                <div class="class-info">
-                                    <strong>ОРГ</strong>
-                                    <span>Seminar · Зубков А.В.</span>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">13:10–14:30</div>
-                                <div class="class-info">
-                                    <strong>ОРГ</strong>
-                                    <span>Seminar · Зубков А.В.</span>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">15:00–16:20</div>
-                                <div class="class-info">
-                                    <strong>Discrete Mathematics</strong>
-                                    <span>Lecture · Мажуга А.М.</span>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">16:40–18:00</div>
-                                <div class="class-info">
-                                    <strong>Discrete Mathematics</strong>
-                                    <span>Seminar · Мажуга А.М.</span>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">18:20–19:40</div>
-                                <div class="class-info">
-                                    <strong>Russian History</strong>
-                                    <span>Seminar · Лупарёва Н.Н.</span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </article>
-
-
-                    <article class="schedule-day">
-                        <div class="day-header">
-                            <span>Wednesday</span>
-                        </div>
-
-                        <div class="class-list">
-
-                            <div class="class-session">
-                                <div class="class-time">13:10–14:30</div>
-                                <div class="class-info">
-                                    <strong>C++</strong>
-                                    <span>Seminar · Савищенко В.Р.</span>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">16:40–18:00</div>
-                                <div class="class-info">
-                                    <strong>C++</strong>
-                                    <span>Lecture · Горденко М.К.</span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </article>
-
-
-                    <article class="schedule-day">
-                        <div class="day-header">
-                            <span>Thursday</span>
-                        </div>
-
-                        <div class="day-empty">
-                            Free day
-                        </div>
-                    </article>
-
-
-                    <article class="schedule-day">
-                        <div class="day-header">
-                            <span>Friday</span>
-                        </div>
-
-                        <div class="class-list">
-
-                            <div class="class-session">
-                                <div class="class-time">11:30–12:50</div>
-                                <div class="class-info">
-                                    <strong>English</strong>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">13:10–14:30</div>
-                                <div class="class-info">
-                                    <strong>English</strong>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">15:00–16:20</div>
-                                <div class="class-info">
-                                    <strong>C++</strong>
-                                    <span>Seminar · Савищенко В.Р.</span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </article>
-
-
-                    <article class="schedule-day">
-                        <div class="day-header">
-                            <span>Saturday</span>
-                        </div>
-
-                        <div class="class-list">
-
-                            <div class="class-session">
-                                <div class="class-time">13:10–14:30</div>
-                                <div class="class-info">
-                                    <strong>Linear Algebra</strong>
-                                    <span>Seminar · Егорова А.Н.</span>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">15:00–16:20</div>
-                                <div class="class-info">
-                                    <strong>Discrete Mathematics</strong>
-                                    <span>Lecture · Мажуга А.М.</span>
-                                </div>
-                            </div>
-
-                            <div class="class-session">
-                                <div class="class-time">16:40–18:00</div>
-                                <div class="class-info">
-                                    <strong>Discrete Mathematics</strong>
-                                    <span>Seminar · Мажуга А.М.</span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </article>
-
-
-                    <article class="schedule-day">
-                        <div class="day-header">
-                            <span>Sunday</span>
-                        </div>
-
-                        <div class="day-empty">
-                            Free day
-                        </div>
-                    </article>
-
-                </section>
-
-            </section>
-
-        </main>
-
-        <footer class="site-footer">
-
-            <div class="footer-identity">
-                <span>Artyom Sergazinov</span>
-                <span class="footer-dot">·</span>
-                <span>2026</span>
+              <p class="inner-description" data-i18n="schedule.description">
+                Class schedule for HSE Computing and Data Science.
+              </p>
             </div>
 
-            <a class="admin-link" href="/admin/">
-                Admin
-            </a>
+            <div class="schedule-controls">
+              <div class="current-clock">
+                <div class="current-clock-date" id="currentDate">—</div>
 
-        </footer>
+                <div class="current-clock-time" id="currentTime">--:--:--</div>
 
+                <div
+                  class="current-clock-zone"
+                  id="currentTimezone"
+                  data-i18n="schedule.localTime"
+                >
+                  LOCAL TIME
+                </div>
+              </div>
+
+              <button
+                class="schedule-timezone"
+                id="timezoneToggle"
+                type="button"
+                aria-label="Switch schedule timezone"
+                data-i18n-aria-label="schedule.timezoneLabel"
+              >
+                ASTANA TIME · UTC+5
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="group-switcher"
+            aria-label="Select group"
+            data-i18n-aria-label="schedule.groupLabel"
+          >
+            <button type="button">261</button>
+            <button type="button">262</button>
+            <button type="button" class="active">263</button>
+          </div>
+
+          <section class="schedule-week">
+            <article class="schedule-day">
+              <div class="day-header">
+                <span data-i18n="day.monday">Monday</span>
+              </div>
+
+              <div class="class-list">
+                <div class="class-session">
+                  <div class="class-time">13:10–14:30</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.linearAlgebra">
+                      Linear Algebra
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.lecture"> Lecture </span>
+                      · Медведь Н.Ю.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">18:20–19:40</div>
+
+                  <div class="class-info">
+                    <strong>C++</strong>
+
+                    <span>
+                      <span data-i18n="class.lecture"> Lecture </span>
+                      · Горденко М.К.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="schedule-day">
+              <div class="day-header">
+                <span data-i18n="day.tuesday">Tuesday</span>
+              </div>
+
+              <div class="class-list">
+                <div class="class-session">
+                  <div class="class-time">11:30–12:50</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.statehood">
+                      Russian Statehood
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.seminar"> Seminar </span>
+                      · Зубков А.В.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">13:10–14:30</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.statehood">
+                      Russian Statehood
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.seminar"> Seminar </span>
+                      · Зубков А.В.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">15:00–16:20</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.discreteMath">
+                      Discrete Mathematics
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.lecture"> Lecture </span>
+                      · Мажуга А.М.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">16:40–18:00</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.discreteMath">
+                      Discrete Mathematics
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.seminar"> Seminar </span>
+                      · Мажуга А.М.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">18:20–19:40</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.russianHistory">
+                      Russian History
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.seminar"> Seminar </span>
+                      · Лупарёва Н.Н.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="schedule-day">
+              <div class="day-header">
+                <span data-i18n="day.wednesday">Wednesday</span>
+              </div>
+
+              <div class="class-list">
+                <div class="class-session">
+                  <div class="class-time">13:10–14:30</div>
+
+                  <div class="class-info">
+                    <strong>C++</strong>
+
+                    <span>
+                      <span data-i18n="class.seminar"> Seminar </span>
+                      · Савищенко В.Р.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">16:40–18:00</div>
+
+                  <div class="class-info">
+                    <strong>C++</strong>
+
+                    <span>
+                      <span data-i18n="class.lecture"> Lecture </span>
+                      · Горденко М.К.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="schedule-day">
+              <div class="day-header">
+                <span data-i18n="day.thursday">Thursday</span>
+              </div>
+
+              <div class="day-empty" data-i18n="schedule.freeDay">Free day</div>
+            </article>
+
+            <article class="schedule-day">
+              <div class="day-header">
+                <span data-i18n="day.friday">Friday</span>
+              </div>
+
+              <div class="class-list">
+                <div class="class-session">
+                  <div class="class-time">11:30–12:50</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.english"> English </strong>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">13:10–14:30</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.english"> English </strong>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">15:00–16:20</div>
+
+                  <div class="class-info">
+                    <strong>C++</strong>
+
+                    <span>
+                      <span data-i18n="class.seminar"> Seminar </span>
+                      · Савищенко В.Р.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="schedule-day">
+              <div class="day-header">
+                <span data-i18n="day.saturday">Saturday</span>
+              </div>
+
+              <div class="class-list">
+                <div class="class-session">
+                  <div class="class-time">13:10–14:30</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.linearAlgebra">
+                      Linear Algebra
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.seminar"> Seminar </span>
+                      · Егорова А.Н.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">15:00–16:20</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.discreteMath">
+                      Discrete Mathematics
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.lecture"> Lecture </span>
+                      · Мажуга А.М.
+                    </span>
+                  </div>
+                </div>
+
+                <div class="class-session">
+                  <div class="class-time">16:40–18:00</div>
+
+                  <div class="class-info">
+                    <strong data-i18n="course.discreteMath">
+                      Discrete Mathematics
+                    </strong>
+
+                    <span>
+                      <span data-i18n="class.seminar"> Seminar </span>
+                      · Мажуга А.М.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="schedule-day">
+              <div class="day-header">
+                <span data-i18n="day.sunday">Sunday</span>
+              </div>
+
+              <div class="day-empty" data-i18n="schedule.freeDay">Free day</div>
+            </article>
+          </section>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-identity">
+          <span>Artyom Sergazinov</span>
+          <span class="footer-dot">·</span>
+          <span>2026</span>
+        </div>
+
+        <a class="admin-link" href="/admin/" data-i18n="nav.admin"> Admin </a>
+      </footer>
     </div>
 
     <script src="../script.js"></script>
-
-</body>
-
+  </body>
 </html>
