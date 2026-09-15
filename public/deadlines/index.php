@@ -16,7 +16,9 @@ $deadlines = getPublishedDeadlines($pdo);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Deadlines · Sergazinov</title>
+    <title data-i18n="deadlines.pageTitle">
+        Deadlines · Sergazinov
+    </title>
 
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -27,21 +29,53 @@ $deadlines = getPublishedDeadlines($pdo);
 
         <header class="site-header">
 
-            <a class="site-logo" href="/" aria-label="Sergazinov home">
+            <a
+                class="site-logo"
+                href="/"
+                aria-label="Sergazinov home"
+                data-i18n-aria-label="header.homeLabel">
                 sergazinov
             </a>
 
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                type="button"
-                aria-label="Toggle theme"
-                aria-pressed="false"
-            >
-                <span class="theme-icon moon">☾</span>
-                <span class="theme-icon sun">☀</span>
-                <span class="theme-thumb"></span>
-            </button>
+            <div class="header-controls">
+
+                <div
+                    class="language-switcher"
+                    role="group"
+                    aria-label="Language"
+                    data-i18n-aria-label="header.languageLabel">
+                    <button
+                        class="language-option is-active"
+                        type="button"
+                        data-language="en"
+                        aria-pressed="true">
+                        EN
+                    </button>
+
+                    <span class="language-divider">/</span>
+
+                    <button
+                        class="language-option"
+                        type="button"
+                        data-language="ru"
+                        aria-pressed="false">
+                        RU
+                    </button>
+                </div>
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Toggle theme"
+                    aria-pressed="false"
+                    data-i18n-aria-label="header.themeLabel">
+                    <span class="theme-icon moon">☾</span>
+                    <span class="theme-icon sun">☀</span>
+                    <span class="theme-thumb"></span>
+                </button>
+
+            </div>
 
         </header>
 
@@ -50,15 +84,21 @@ $deadlines = getPublishedDeadlines($pdo);
 
             <section class="inner-page">
 
-                <p class="hero-eyebrow">
+                <p
+                    class="hero-eyebrow"
+                    data-i18n="deadlines.eyebrow">
                     COMPUTING AND DATA SCIENCE
                 </p>
 
-                <h1 class="inner-title">
+                <h1
+                    class="inner-title"
+                    data-i18n="deadlines.title">
                     Deadlines
                 </h1>
 
-                <p class="inner-description">
+                <p
+                    class="inner-description"
+                    data-i18n="deadlines.description">
                     Upcoming coursework and submission deadlines.
                 </p>
 
@@ -70,7 +110,7 @@ $deadlines = getPublishedDeadlines($pdo);
                         id="timezoneToggle"
                         type="button"
                         aria-label="Switch deadline timezone"
-                    >
+                        data-i18n-aria-label="deadlines.timezoneLabel">
                         ASTANA TIME · UTC+5
                     </button>
 
@@ -83,11 +123,15 @@ $deadlines = getPublishedDeadlines($pdo);
 
                         <div class="deadlines-empty">
 
-                            <p class="deadlines-empty-title">
+                            <p
+                                class="deadlines-empty-title"
+                                data-i18n="deadlines.emptyTitle">
                                 No deadlines yet.
                             </p>
 
-                            <p class="deadlines-empty-text">
+                            <p
+                                class="deadlines-empty-text"
+                                data-i18n="deadlines.emptyText">
                                 Upcoming deadlines will appear here.
                             </p>
 
@@ -99,9 +143,16 @@ $deadlines = getPublishedDeadlines($pdo);
 
                             <article class="deadline-card">
 
-                                <div class="deadline-course">
+                                <div
+                                    class="deadline-course"
+                                    data-i18n-course="<?= htmlspecialchars(
+                                        $deadline['course_slug'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ) ?>">
                                     <?= htmlspecialchars(
-                                        $deadline['course_short_name'] ?: $deadline['course_name'],
+                                        $deadline['course_short_name']
+                                            ?: $deadline['course_name'],
                                         ENT_QUOTES,
                                         'UTF-8'
                                     ) ?>
@@ -135,10 +186,11 @@ $deadlines = getPublishedDeadlines($pdo);
                                         $deadline['due_at_utc'],
                                         ENT_QUOTES,
                                         'UTF-8'
-                                    ) ?>"
-                                >
+                                    ) ?>">
 
-                                    <div class="deadline-date-label">
+                                    <div
+                                        class="deadline-date-label"
+                                        data-i18n="deadlines.deadlineLabel">
                                         Deadline
                                     </div>
 
@@ -148,15 +200,16 @@ $deadlines = getPublishedDeadlines($pdo);
                                             $deadline['due_at_utc'],
                                             ENT_QUOTES,
                                             'UTF-8'
-                                        ) ?>"
-                                    >
+                                        ) ?>">
                                         —
                                     </time>
 
 
                                     <div class="deadline-countdown">
 
-                                        <span class="deadline-countdown-label">
+                                        <span
+                                            class="deadline-countdown-label"
+                                            data-i18n="deadlines.dueIn">
                                             Due in
                                         </span>
 
@@ -189,7 +242,10 @@ $deadlines = getPublishedDeadlines($pdo);
                 <span>2026</span>
             </div>
 
-            <a class="admin-link" href="/admin/">
+            <a
+                class="admin-link"
+                href="/admin/"
+                data-i18n="nav.admin">
                 Admin
             </a>
 

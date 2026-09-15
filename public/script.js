@@ -182,7 +182,10 @@ if (deadlineElements.length > 0) {
   function formatDeadlineDate(date, timezone) {
     const settings = deadlineTimezones[timezone];
 
-    const parts = new Intl.DateTimeFormat("en-GB", {
+    const language = getSiteLanguage();
+    const locale = language === "ru" ? "ru-RU" : "en-GB";
+
+    const parts = new Intl.DateTimeFormat(locale, {
       timeZone: settings.zone,
       day: "2-digit",
       month: "short",
@@ -208,8 +211,10 @@ if (deadlineElements.length > 0) {
   }
 
   function formatCountdown(milliseconds) {
+    const language = getSiteLanguage();
+
     if (milliseconds <= 0) {
-      return "DEADLINE PASSED";
+      return language === "ru" ? "СРОК ИСТЁК" : "DEADLINE PASSED";
     }
 
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -219,16 +224,31 @@ if (deadlineElements.length > 0) {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
+    const units =
+      language === "ru"
+        ? {
+            day: "Д",
+            hour: "Ч",
+            minute: "М",
+            second: "С",
+          }
+        : {
+            day: "D",
+            hour: "H",
+            minute: "M",
+            second: "S",
+          };
+
     const parts = [];
 
     if (days > 0) {
-      parts.push(`${days}D`);
+      parts.push(`${days}${units.day}`);
     }
 
     parts.push(
-      `${String(hours).padStart(2, "0")}H`,
-      `${String(minutes).padStart(2, "0")}M`,
-      `${String(seconds).padStart(2, "0")}S`,
+      `${String(hours).padStart(2, "0")}${units.hour}`,
+      `${String(minutes).padStart(2, "0")}${units.minute}`,
+      `${String(seconds).padStart(2, "0")}${units.second}`,
     );
 
     return parts.join(" · ");
@@ -307,6 +327,15 @@ const translations = {
     "course.russianHistory": "Russian History",
     "course.statehood": "Russian Statehood",
     "course.english": "English",
+    "deadlines.pageTitle": "Deadlines · Sergazinov",
+    "deadlines.eyebrow": "COMPUTING AND DATA SCIENCE",
+    "deadlines.title": "Deadlines",
+    "deadlines.description": "Upcoming coursework and submission deadlines.",
+    "deadlines.timezoneLabel": "Switch deadline timezone",
+    "deadlines.emptyTitle": "No deadlines yet.",
+    "deadlines.emptyText": "Upcoming deadlines will appear here.",
+    "deadlines.deadlineLabel": "Deadline",
+    "deadlines.dueIn": "Due in",
   },
 
   ru: {
@@ -351,6 +380,15 @@ const translations = {
     "course.russianHistory": "История России",
     "course.statehood": "ОРГ",
     "course.english": "Английский язык",
+    "deadlines.pageTitle": "Дедлайны · Sergazinov",
+    "deadlines.eyebrow": "КНАД · НИУ ВШЭ, МОСКВА",
+    "deadlines.title": "Дедлайны",
+    "deadlines.description": "Предстоящие учебные задания и сроки сдачи.",
+    "deadlines.timezoneLabel": "Переключить часовой пояс дедлайнов",
+    "deadlines.emptyTitle": "Дедлайнов пока нет.",
+    "deadlines.emptyText": "Предстоящие дедлайны появятся здесь.",
+    "deadlines.deadlineLabel": "Дедлайн",
+    "deadlines.dueIn": "Осталось",
   },
 };
 
@@ -362,6 +400,14 @@ function getCurrentLanguage() {
   return savedLanguage === "ru" ? "ru" : "en";
 }
 
+const courseTranslationKeys = {
+  "linear-algebra": "course.linearAlgebra",
+  "discrete-mathematics": "course.discreteMath",
+  "russian-history": "course.russianHistory",
+  "russian-statehood": "course.statehood",
+  english: "course.english",
+};
+
 function applyLanguage(language) {
   const dictionary = translations[language];
 
@@ -371,6 +417,15 @@ function applyLanguage(language) {
     const key = element.dataset.i18n;
 
     if (dictionary[key]) {
+      element.textContent = dictionary[key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-course]").forEach((element) => {
+    const slug = element.dataset.i18nCourse;
+    const key = courseTranslationKeys[slug];
+
+    if (key && dictionary[key]) {
       element.textContent = dictionary[key];
     }
   });
