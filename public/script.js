@@ -249,3 +249,88 @@ if (deadlineElements.length > 0) {
     deadlineTimezoneToggle.addEventListener("click", updateDeadlineDisplay);
   }
 }
+
+const translations = {
+  en: {
+    "header.homeLabel": "Sergazinov home",
+    "header.languageLabel": "Language",
+    "header.themeLabel": "Toggle theme",
+
+    "home.eyebrow": "CDS · HSE Moscow",
+    "home.titleFirst": "Computing",
+    "home.titleSecond": "Data Science",
+    "home.description":
+      "A personal learning hub documenting my journey through Full-Stack Development and the Computing & Data Science program at HSE Moscow.",
+    "home.navigationLabel": "Main navigation",
+
+    "nav.courses": "Courses",
+    "nav.schedule": "Schedule",
+    "nav.deadlines": "Deadlines",
+    "nav.admin": "Admin",
+  },
+
+  ru: {
+    "header.homeLabel": "Главная страница Sergazinov",
+    "header.languageLabel": "Язык",
+    "header.themeLabel": "Переключить тему",
+
+    "home.eyebrow": "КНАД · НИУ ВШЭ, Москва",
+    "home.titleFirst": "Компьютерные науки",
+    "home.titleSecond": "Анализ данных",
+    "home.description":
+      "Мой учебный проект о Full-Stack разработке и обучении на программе «Компьютерные науки и анализ данных» в НИУ ВШЭ.",
+    "home.navigationLabel": "Основная навигация",
+
+    "nav.courses": "Курсы",
+    "nav.schedule": "Расписание",
+    "nav.deadlines": "Дедлайны",
+    "nav.admin": "Админ",
+  },
+};
+
+const languageButtons = document.querySelectorAll("[data-language]");
+
+function getCurrentLanguage() {
+  const savedLanguage = localStorage.getItem("siteLanguage");
+
+  return savedLanguage === "ru" ? "ru" : "en";
+}
+
+function applyLanguage(language) {
+  const dictionary = translations[language];
+
+  document.documentElement.lang = language;
+
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    const key = element.dataset.i18n;
+
+    if (dictionary[key]) {
+      element.textContent = dictionary[key];
+    }
+  });
+
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+    const key = element.dataset.i18nAriaLabel;
+
+    if (dictionary[key]) {
+      element.setAttribute("aria-label", dictionary[key]);
+    }
+  });
+
+  languageButtons.forEach((button) => {
+    const isActive = button.dataset.language === language;
+
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  localStorage.setItem("siteLanguage", language);
+}
+
+languageButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    applyLanguage(button.dataset.language);
+  });
+});
+
+applyLanguage(getCurrentLanguage());
