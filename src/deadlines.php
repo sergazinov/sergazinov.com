@@ -14,6 +14,7 @@ function getPublishedDeadlines(PDO $pdo): array
             deadlines.description,
             deadlines.due_at_utc,
             deadlines.source_timezone,
+            deadlines.assignment_url,
             courses.slug AS course_slug,
             courses.name AS course_name,
             courses.short_name AS course_short_name

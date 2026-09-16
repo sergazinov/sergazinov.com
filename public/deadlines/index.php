@@ -146,10 +146,10 @@ $deadlines = getPublishedDeadlines($pdo);
                                 <div
                                     class="deadline-course"
                                     data-i18n-course="<?= htmlspecialchars(
-                                        $deadline['course_slug'],
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>">
+                                                            $deadline['course_slug'],
+                                                            ENT_QUOTES,
+                                                            'UTF-8'
+                                                        ) ?>">
                                     <?= htmlspecialchars(
                                         $deadline['course_short_name']
                                             ?: $deadline['course_name'],
@@ -183,10 +183,10 @@ $deadlines = getPublishedDeadlines($pdo);
                                     class="deadline-meta"
                                     data-deadline
                                     data-due-at="<?= htmlspecialchars(
-                                        $deadline['due_at_utc'],
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>">
+                                                        $deadline['due_at_utc'],
+                                                        ENT_QUOTES,
+                                                        'UTF-8'
+                                                    ) ?>">
 
                                     <div
                                         class="deadline-date-label"
@@ -197,10 +197,10 @@ $deadlines = getPublishedDeadlines($pdo);
                                     <time
                                         class="deadline-time"
                                         datetime="<?= htmlspecialchars(
-                                            $deadline['due_at_utc'],
-                                            ENT_QUOTES,
-                                            'UTF-8'
-                                        ) ?>">
+                                                        $deadline['due_at_utc'],
+                                                        ENT_QUOTES,
+                                                        'UTF-8'
+                                                    ) ?>">
                                         —
                                     </time>
 
@@ -220,6 +220,23 @@ $deadlines = getPublishedDeadlines($pdo);
                                     </div>
 
                                 </div>
+
+                                <?php if (!empty($deadline['assignment_url'])): ?>
+
+                                    <a
+                                        class="deadline-assignment-link"
+                                        href="<?= htmlspecialchars(
+                                                    $deadline['assignment_url'],
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                ) ?>"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        data-i18n="deadlines.openAssignment">
+                                        Open assignment
+                                    </a>
+
+                                <?php endif; ?>
 
                             </article>
 
