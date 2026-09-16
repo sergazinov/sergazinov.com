@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Return all published deadlines ordered from nearest to latest.
+ * Return upcoming deadlines and deadlines overdue by less than 48 hours.
  */
 function getPublishedDeadlines(PDO $pdo): array
 {
@@ -22,7 +22,8 @@ function getPublishedDeadlines(PDO $pdo): array
         INNER JOIN courses
             ON courses.id = deadlines.course_id
         WHERE deadlines.is_published = 1
-          AND courses.is_active = 1
+            AND courses.is_active = 1
+            AND datetime(deadlines.due_at_utc) >= datetime(\'now\', \'-2 days\')
         ORDER BY deadlines.due_at_utc ASC
     ';
 
