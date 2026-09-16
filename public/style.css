@@ -1013,10 +1013,6 @@ body.light .theme-thumb {
 }
 
 @media (max-width: 560px) {
-  .deadlines-toolbar {
-    justify-content: flex-start;
-  }
-
   .deadline-countdown-value {
     font-size: 1rem;
   }
