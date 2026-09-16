@@ -219,9 +219,7 @@ $deadlines = getPublishedDeadlines($pdo);
 
                                     <div class="deadline-countdown">
 
-                                        <span
-                                            class="deadline-countdown-label"
-                                            data-i18n="deadlines.dueIn">
+                                        <span class="deadline-countdown-label">
                                             Due in
                                         </span>
 

@@ -979,11 +979,62 @@ body.light .theme-thumb {
 
   margin-top: 7px;
 
-  color: var(--accent-start);
-
   font-size: 1.15rem;
   font-weight: 720;
   letter-spacing: 0.04em;
+}
+
+.deadline-countdown-value.is-safe {
+  color: #43d66f;
+}
+
+.deadline-countdown-value.is-warning {
+  color: #f0b84b;
+}
+
+.deadline-countdown-value.is-urgent {
+  color: #ff4d5a;
+
+  animation: deadline-urgent-pulse 1.8s ease-in-out infinite;
+}
+
+.deadline-countdown-value.is-overdue {
+  color: #b64b63;
+}
+
+/* Light theme */
+
+body.light .deadline-countdown-value.is-safe {
+  color: #168a3f;
+}
+
+body.light .deadline-countdown-value.is-warning {
+  color: #b76a00;
+}
+
+body.light .deadline-countdown-value.is-urgent {
+  color: #d82635;
+}
+
+body.light .deadline-countdown-value.is-overdue {
+  color: #91384d;
+}
+
+@keyframes deadline-urgent-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.78;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deadline-countdown-value.is-urgent {
+    animation: none;
+  }
 }
 
 .deadline-assignment-link {

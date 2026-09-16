@@ -210,14 +210,10 @@ if (deadlineElements.length > 0) {
     );
   }
 
-  function formatCountdown(milliseconds) {
+  function formatDuration(milliseconds) {
     const language = getSiteLanguage();
 
-    if (milliseconds <= 0) {
-      return language === "ru" ? "СРОК ИСТЁК" : "DEADLINE PASSED";
-    }
-
-    const totalSeconds = Math.floor(milliseconds / 1000);
+    const totalSeconds = Math.floor(Math.abs(milliseconds) / 1000);
 
     const days = Math.floor(totalSeconds / 86400);
     const hours = Math.floor((totalSeconds % 86400) / 3600);
@@ -258,8 +254,12 @@ if (deadlineElements.length > 0) {
     const timezone = getDeadlineTimezone();
     const now = Date.now();
 
+    const hour = 60 * 60 * 1000;
+    const day = 24 * hour;
+
     deadlineElements.forEach((deadlineElement) => {
       const deadlineDate = new Date(deadlineElement.dataset.dueAt);
+      const remaining = deadlineDate.getTime() - now;
 
       const timeElement = deadlineElement.querySelector(".deadline-time");
 
@@ -267,11 +267,42 @@ if (deadlineElements.length > 0) {
         ".deadline-countdown-value",
       );
 
+      const countdownLabel = deadlineElement.querySelector(
+        ".deadline-countdown-label",
+      );
+
       timeElement.textContent = formatDeadlineDate(deadlineDate, timezone);
 
-      countdownElement.textContent = formatCountdown(
-        deadlineDate.getTime() - now,
+      countdownElement.classList.remove(
+        "is-safe",
+        "is-warning",
+        "is-urgent",
+        "is-overdue",
       );
+
+      const language = getSiteLanguage();
+
+      if (remaining <= 0) {
+        countdownLabel.textContent =
+          language === "ru" ? "Просрочено на" : "Overdue by";
+
+        countdownElement.textContent = formatDuration(remaining);
+        countdownElement.classList.add("is-overdue");
+
+        return;
+      }
+
+      countdownLabel.textContent = language === "ru" ? "Осталось" : "Due in";
+
+      countdownElement.textContent = formatDuration(remaining);
+
+      if (remaining > 2 * day) {
+        countdownElement.classList.add("is-safe");
+      } else if (remaining > day) {
+        countdownElement.classList.add("is-warning");
+      } else {
+        countdownElement.classList.add("is-urgent");
+      }
     });
   }
 
