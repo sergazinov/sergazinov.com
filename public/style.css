@@ -937,7 +937,9 @@ body.light .theme-thumb {
   margin-top: 28px;
 
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
 }
 
 .deadline-meta {
@@ -982,6 +984,32 @@ body.light .theme-thumb {
   font-size: 1.15rem;
   font-weight: 720;
   letter-spacing: 0.04em;
+}
+
+.deadline-assignment-link {
+  display: inline-flex;
+  align-items: center;
+
+  margin-top: 20px;
+  padding: 9px 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  color: var(--text);
+  text-decoration: none;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.deadline-assignment-link:hover {
+  border-color: var(--accent-start);
+  color: var(--accent-start);
 }
 
 @media (max-width: 560px) {

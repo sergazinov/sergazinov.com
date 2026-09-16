@@ -327,6 +327,8 @@ const translations = {
     "course.russianHistory": "Russian History",
     "course.statehood": "Russian Statehood",
     "course.english": "English",
+
+    "deadlines.openAssignment": "Open assignment",
     "deadlines.pageTitle": "Deadlines · Sergazinov",
     "deadlines.eyebrow": "COMPUTING AND DATA SCIENCE",
     "deadlines.title": "Deadlines",
@@ -380,6 +382,8 @@ const translations = {
     "course.russianHistory": "История России",
     "course.statehood": "ОРГ",
     "course.english": "Английский язык",
+
+    "deadlines.openAssignment": "Открыть задание",
     "deadlines.pageTitle": "Дедлайны · Sergazinov",
     "deadlines.eyebrow": "КНАД · НИУ ВШЭ, МОСКВА",
     "deadlines.title": "Дедлайны",
