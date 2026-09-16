@@ -17,7 +17,7 @@ $deadlines = getPublishedDeadlines($pdo);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title data-i18n="deadlines.pageTitle">
-        Deadlines · Sergazinov
+        sergazinov · deadlines
     </title>
 
     <link rel="stylesheet" href="../style.css">
@@ -104,6 +104,18 @@ $deadlines = getPublishedDeadlines($pdo);
 
 
                 <div class="deadlines-toolbar">
+
+                    <div class="current-clock">
+                        <div class="current-clock-date" id="currentDate">—</div>
+
+                        <div class="current-clock-time" id="currentTime">--:--:--</div>
+
+                        <div
+                            class="current-clock-zone"
+                            id="currentTimezone">
+                            LOCAL TIME
+                        </div>
+                    </div>
 
                     <button
                         class="schedule-timezone"
