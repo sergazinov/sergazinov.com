@@ -449,6 +449,42 @@ body.light .theme-thumb {
   }
 }
 
+.inner-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 14px;
+
+  color: var(--text);
+  text-decoration: none;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition: opacity 0.2s ease;
+}
+
+.inner-home-link:hover {
+  opacity: 0.65;
+}
+
+.inner-home-arrow {
+  display: inline-block;
+
+  font-size: 0.9rem;
+  line-height: 1;
+
+  transform: translateY(-1px);
+}
+
+.inner-home-arrow {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 /* =========================================================
    SCHEDULE PAGE
    ========================================================= */
@@ -691,6 +727,12 @@ body.light .theme-thumb {
     padding: 28px 0 40px;
   }
 
+  .inner-home-link {
+    margin-top: 11px;
+
+    font-size: 0.68rem;
+  }
+
   .inner-title {
     font-size: 3rem;
   }
@@ -879,7 +921,7 @@ body.light .class-status.is-next {
   }
 
   50% {
-    filter: brightness(0.20);
+    filter: brightness(0.2);
     opacity: 0.82;
   }
 }

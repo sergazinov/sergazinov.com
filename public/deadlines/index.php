@@ -96,6 +96,11 @@ $deadlines = getPublishedDeadlines($pdo);
                     Deadlines
                 </h1>
 
+                <a class="inner-home-link" href="/">
+                    <span class="inner-home-arrow" aria-hidden="true">←</span>
+                    <span data-i18n="nav.home">Home</span>
+                </a>
+
                 <p
                     class="inner-description"
                     data-i18n="deadlines.description">
