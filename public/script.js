@@ -20,7 +20,7 @@ themeToggle.addEventListener("click", () => {
 const timezoneToggle = document.getElementById("timezoneToggle");
 
 function getSiteLanguage() {
-  return localStorage.getItem("siteLanguage") === "ru" ? "ru" : "en";
+  return localStorage.getItem("siteLanguage") === "en" ? "en" : "ru";
 }
 
 function getScheduleTimezoneLabel(timezone, language = getSiteLanguage()) {
@@ -636,7 +636,7 @@ const languageButtons = document.querySelectorAll("[data-language]");
 function getCurrentLanguage() {
   const savedLanguage = localStorage.getItem("siteLanguage");
 
-  return savedLanguage === "ru" ? "ru" : "en";
+  return savedLanguage === "en" ? "en" : "ru";
 }
 
 const courseTranslationKeys = {
