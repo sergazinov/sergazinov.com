@@ -452,37 +452,34 @@ body.light .theme-thumb {
 .inner-home-link {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
 
   margin-top: 14px;
+
+  border: 1px solid var(--border);
+  border-radius: 50%;
 
   color: var(--text);
   text-decoration: none;
 
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  transition: opacity 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .inner-home-link:hover {
-  opacity: 0.65;
+  opacity: 0.7;
+  border-color: var(--muted);
 }
 
-.inner-home-arrow {
-  display: inline-block;
+.inner-home-icon {
+  display: block;
 
-  font-size: 0.9rem;
-  line-height: 1;
-
-  transform: translateY(-1px);
-}
-
-.inner-home-arrow {
-  font-size: 1rem;
-  line-height: 1;
+  width: 17px;
+  height: 17px;
 }
 
 /* =========================================================
@@ -728,9 +725,15 @@ body.light .theme-thumb {
   }
 
   .inner-home-link {
-    margin-top: 11px;
+    width: 32px;
+    height: 32px;
 
-    font-size: 0.68rem;
+    margin-top: 11px;
+  }
+
+  .inner-home-icon {
+    width: 16px;
+    height: 16px;
   }
 
   .inner-title {
@@ -1007,7 +1010,18 @@ body.light .class-status.is-next {
   margin: 10px 0 0;
 
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 720;
+  line-height: 1.35;
+}
+
+.deadline-homework-number {
+  margin-top: 7px;
+
+  color: var(--muted);
+
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
 }
 
 .deadline-description {

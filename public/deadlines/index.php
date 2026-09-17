@@ -96,9 +96,37 @@ $deadlines = getPublishedDeadlines($pdo);
                     Deadlines
                 </h1>
 
-                <a class="inner-home-link" href="/">
-                    <span class="inner-home-arrow" aria-hidden="true">←</span>
-                    <span data-i18n="nav.home">Home</span>
+                <a
+                    class="inner-home-link"
+                    href="/"
+                    aria-label="Sergazinov home"
+                    data-i18n-aria-label="header.homeLabel">
+                    <svg
+                        class="inner-home-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path
+                            d="M3 10.5L12 3l9 7.5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M5.5 9.5V21h13V9.5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path
+                            d="M9.5 21v-6h5v6"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
                 </a>
 
                 <p
@@ -175,23 +203,39 @@ $deadlines = getPublishedDeadlines($pdo);
                                     ) ?>
                                 </div>
 
-                                <h2 class="deadline-title">
-                                    <?= htmlspecialchars(
-                                        $deadline['title'],
-                                        ENT_QUOTES,
-                                        'UTF-8'
-                                    ) ?>
-                                </h2>
-
                                 <?php if (!empty($deadline['description'])): ?>
 
-                                    <p class="deadline-description">
+                                    <h2 class="deadline-title">
                                         <?= htmlspecialchars(
                                             $deadline['description'],
                                             ENT_QUOTES,
                                             'UTF-8'
                                         ) ?>
-                                    </p>
+                                    </h2>
+
+                                    <div
+                                        class="deadline-homework-number"
+                                        data-homework-title="<?= htmlspecialchars(
+                                                                    $deadline['title'],
+                                                                    ENT_QUOTES,
+                                                                    'UTF-8'
+                                                                ) ?>">
+                                        <?= htmlspecialchars(
+                                            $deadline['title'],
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        ) ?>
+                                    </div>
+
+                                <?php else: ?>
+
+                                    <h2 class="deadline-title">
+                                        <?= htmlspecialchars(
+                                            $deadline['title'],
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        ) ?>
+                                    </h2>
 
                                 <?php endif; ?>
 

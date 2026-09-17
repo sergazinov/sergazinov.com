@@ -660,6 +660,18 @@ function applyLanguage(language) {
     }
   });
 
+  document.querySelectorAll("[data-homework-title]").forEach((element) => {
+    const originalTitle = element.dataset.homeworkTitle;
+    const match = originalTitle.match(/^Homework\s+(\d+)$/i);
+
+    if (match) {
+      element.textContent =
+        language === "ru" ? `ДЗ ${match[1]}` : `Homework ${match[1]}`;
+    } else {
+      element.textContent = originalTitle;
+    }
+  });
+
   document.querySelectorAll("[data-i18n-course]").forEach((element) => {
     const slug = element.dataset.i18nCourse;
     const key = courseTranslationKeys[slug];
