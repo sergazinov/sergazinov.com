@@ -17,7 +17,7 @@ $deadlines = getPublishedDeadlines($pdo);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title data-i18n="deadlines.pageTitle">
-        sergazinov · deadlines
+        deadlines · zaKNADka
     </title>
 
     <link rel="stylesheet" href="../style.css">
@@ -32,9 +32,9 @@ $deadlines = getPublishedDeadlines($pdo);
             <a
                 class="site-logo"
                 href="/"
-                aria-label="Sergazinov home"
+                aria-label="zaKNADka home"
                 data-i18n-aria-label="header.homeLabel">
-                sergazinov
+                zaKNADka
             </a>
 
             <div class="header-controls">
@@ -87,7 +87,7 @@ $deadlines = getPublishedDeadlines($pdo);
                 <p
                     class="hero-eyebrow"
                     data-i18n="deadlines.eyebrow">
-                    COMPUTING AND DATA SCIENCE
+                    CDS · HSE Moscow
                 </p>
 
                 <h1
@@ -99,7 +99,7 @@ $deadlines = getPublishedDeadlines($pdo);
                 <a
                     class="inner-home-link"
                     href="/"
-                    aria-label="Sergazinov home"
+                    aria-label="zaKNADka home"
                     data-i18n-aria-label="header.homeLabel">
                     <svg
                         class="inner-home-icon"
@@ -313,7 +313,7 @@ $deadlines = getPublishedDeadlines($pdo);
         <footer class="site-footer">
 
             <div class="footer-identity">
-                <span>Artyom Sergazinov</span>
+                <span>sergazinov</span>
                 <span class="footer-dot">·</span>
                 <span>2026</span>
             </div>

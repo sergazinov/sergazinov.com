@@ -519,11 +519,11 @@ if (deadlineElements.length > 0) {
 
 const translations = {
   en: {
-    "header.homeLabel": "Sergazinov home",
+    "header.homeLabel": "zaKNADka home",
     "header.languageLabel": "Language",
     "header.themeLabel": "Toggle theme",
 
-    "home.eyebrow": "CDS · HSE Moscow",
+    "home.eyebrow": "CDS · HSE MOSCOW",
     "home.titleFirst": "Computing",
     "home.titleSecond": "Data Science",
     "home.description":
@@ -535,8 +535,8 @@ const translations = {
     "nav.deadlines": "Deadlines",
     "nav.admin": "Admin",
     "nav.home": "Home",
-    "schedule.pageTitle": "Schedule · Sergazinov",
-    "schedule.eyebrow": "COMPUTING AND DATA SCIENCE",
+    "schedule.pageTitle": "schedule · zaKNADka",
+    "schedule.eyebrow": "CDS · HSE MOSCOW",
     "schedule.title": "Schedule",
     "schedule.description":
       "Class schedule for HSE Computing and Data Science.",
@@ -563,8 +563,8 @@ const translations = {
     "course.english": "English",
 
     "deadlines.openAssignment": "Open assignment",
-    "deadlines.pageTitle": "Deadlines · Sergazinov",
-    "deadlines.eyebrow": "COMPUTING AND DATA SCIENCE",
+    "deadlines.pageTitle": "deadlines · zaKNADka",
+    "deadlines.eyebrow": "CDS · HSE MOSCOW",
     "deadlines.title": "Deadlines",
     "deadlines.description": "Upcoming coursework and submission deadlines.",
     "deadlines.timezoneLabel": "Switch deadline timezone",
@@ -575,11 +575,11 @@ const translations = {
   },
 
   ru: {
-    "header.homeLabel": "Главная страница Sergazinov",
+    "header.homeLabel": "Главная страница zaKNADka",
     "header.languageLabel": "Язык",
     "header.themeLabel": "Переключить тему",
 
-    "home.eyebrow": "КНАД · НИУ ВШЭ, Москва",
+    "home.eyebrow": "КНАД · ВШЭ МОСКВА",
     "home.titleFirst": "Компьютерные науки",
     "home.titleSecond": "Анализ данных",
     "home.description":
@@ -591,8 +591,8 @@ const translations = {
     "nav.deadlines": "Дедлайны",
     "nav.admin": "Админ",
     "nav.home": "Главная",
-    "schedule.pageTitle": "Расписание · Sergazinov",
-    "schedule.eyebrow": "КНАД · НИУ ВШЭ, МОСКВА",
+    "schedule.pageTitle": "расписание · zaKNADka",
+    "schedule.eyebrow": "КНАД · ВШЭ МОСКВА",
     "schedule.title": "Расписание",
     "schedule.description":
       "Расписание занятий программы «Компьютерные науки и анализ данных» НИУ ВШЭ.",
@@ -619,8 +619,8 @@ const translations = {
     "course.english": "Английский язык",
 
     "deadlines.openAssignment": "Открыть задание",
-    "deadlines.pageTitle": "Дедлайны · Sergazinov",
-    "deadlines.eyebrow": "КНАД · НИУ ВШЭ, МОСКВА",
+    "deadlines.pageTitle": "дедлайны · zaKNADka",
+    "deadlines.eyebrow": "КНАД · ВШЭ МОСКВА",
     "deadlines.title": "Дедлайны",
     "deadlines.description": "Предстоящие учебные задания и сроки сдачи.",
     "deadlines.timezoneLabel": "Переключить часовой пояс дедлайнов",
@@ -732,30 +732,30 @@ applyLanguage(getCurrentLanguage());
   const phrases = {
     ru: [
       {
-        text: "тут заныкали домашку...",
+        text: "тут твоя домашка...",
         hold: 2100,
       },
       {
-        text: "дедлайны тоже в нычке...",
+        text: "и дедлайны тоже...",
         hold: 1300,
       },
       {
-        text: "расписание тоже припрятали...",
+        text: "актуальное расписание...",
         hold: 3200,
       },
     ],
 
     en: [
       {
-        text: "homework\'s stashed here...",
+        text: "your homework is in here...",
         hold: 2100,
       },
       {
-        text: "deadlines are under wraps...",
+        text: "and the deadlines...",
         hold: 1300,
       },
       {
-        text: "schedule\'s stashed away...",
+        text: "the schedule is up to date...",
         hold: 3200,
       },
     ],
@@ -851,8 +851,8 @@ applyLanguage(getCurrentLanguage());
     if (reducedMotionQuery.matches) {
       const staticText =
         getSiteLanguage() === "ru"
-          ? "дедлайны в нычке..."
-          : "deadlines stashed here...";
+          ? "тут твоя домашка..."
+          : "your homework is in here...";
 
       typingText.textContent = staticText;
       typingCursor.hidden = true;
