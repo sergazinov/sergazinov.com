@@ -718,3 +718,157 @@ languageButtons.forEach((button) => {
 });
 
 applyLanguage(getCurrentLanguage());
+
+/* ---------- HOME TYPING DEMO ---------- */
+
+(() => {
+  const typingText = document.getElementById("typingText");
+  const typingCursor = document.querySelector(".typing-cursor");
+
+  if (!typingText || !typingCursor) {
+    return;
+  }
+
+  const phrases = {
+    ru: [
+      {
+        text: "тут прячут твою домашку...",
+        hold: 2100,
+      },
+      {
+        text: "тут хранят твои дедлайны...",
+        hold: 1300,
+      },
+      {
+        text: "тут спрятано твоё расписание...",
+        hold: 3200,
+      },
+    ],
+
+    en: [
+      {
+        text: "your homework is hidden here...",
+        hold: 2100,
+      },
+      {
+        text: "your deadlines live here...",
+        hold: 1300,
+      },
+      {
+        text: "your schedule is hidden here...",
+        hold: 3200,
+      },
+    ],
+  };
+
+  const reducedMotionQuery = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
+
+  let animationVersion = 0;
+
+  function wait(milliseconds) {
+    return new Promise((resolve) => {
+      window.setTimeout(resolve, milliseconds);
+    });
+  }
+
+  function getTypingPhrases() {
+    return phrases[getSiteLanguage()] || phrases.ru;
+  }
+
+  async function typePhrase(value, version) {
+    for (const character of value) {
+      if (version !== animationVersion) {
+        return false;
+      }
+
+      typingText.textContent += character;
+
+      const delay = 45 + Math.random() * 45;
+
+      await wait(delay);
+    }
+
+    return version === animationVersion;
+  }
+
+  async function erasePhrase(version) {
+    while (typingText.textContent.length > 0) {
+      if (version !== animationVersion) {
+        return false;
+      }
+
+      typingText.textContent = typingText.textContent.slice(0, -1);
+
+      const delay = 18 + Math.random() * 18;
+
+      await wait(delay);
+    }
+
+    return version === animationVersion;
+  }
+
+  async function runTypingLoop(version) {
+    await wait(450);
+
+    while (version === animationVersion) {
+      const currentPhrases = getTypingPhrases();
+
+      for (const phrase of currentPhrases) {
+        const typed = await typePhrase(phrase.text, version);
+
+        if (!typed) {
+          return;
+        }
+
+        await wait(phrase.hold);
+
+        if (version !== animationVersion) {
+          return;
+        }
+
+        const erased = await erasePhrase(version);
+
+        if (!erased) {
+          return;
+        }
+
+        await wait(300);
+      }
+
+      await wait(500);
+    }
+  }
+
+  function restartTypingDemo() {
+    animationVersion += 1;
+
+    const version = animationVersion;
+
+    typingText.textContent = "";
+
+    if (reducedMotionQuery.matches) {
+      typingText.textContent = getTypingPhrases()[0].text;
+      typingCursor.hidden = true;
+
+      return;
+    }
+
+    typingCursor.hidden = false;
+
+    runTypingLoop(version);
+  }
+
+  document.querySelectorAll(".language-option").forEach((button) => {
+    button.addEventListener("click", () => {
+      window.setTimeout(restartTypingDemo, 0);
+    });
+  });
+
+  if (typeof reducedMotionQuery.addEventListener === "function") {
+    reducedMotionQuery.addEventListener("change", restartTypingDemo);
+  }
+
+  restartTypingDemo();
+})();
