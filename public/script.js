@@ -732,30 +732,30 @@ applyLanguage(getCurrentLanguage());
   const phrases = {
     ru: [
       {
-        text: "тут прячут твою домашку...",
+        text: "тут заныкали домашку...",
         hold: 2100,
       },
       {
-        text: "тут хранят твои дедлайны...",
+        text: "дедлайны тоже в нычке...",
         hold: 1300,
       },
       {
-        text: "тут спрятано твоё расписание...",
+        text: "расписание тоже припрятали...",
         hold: 3200,
       },
     ],
 
     en: [
       {
-        text: "your homework is hidden here...",
+        text: "homework\'s stashed here...",
         hold: 2100,
       },
       {
-        text: "your deadlines live here...",
+        text: "deadlines are under wraps...",
         hold: 1300,
       },
       {
-        text: "your schedule is hidden here...",
+        text: "schedule\'s stashed away...",
         hold: 3200,
       },
     ],
@@ -849,7 +849,12 @@ applyLanguage(getCurrentLanguage());
     typingText.textContent = "";
 
     if (reducedMotionQuery.matches) {
-      typingText.textContent = getTypingPhrases()[0].text;
+      const staticText =
+        getSiteLanguage() === "ru"
+          ? "дедлайны в нычке..."
+          : "deadlines stashed here...";
+
+      typingText.textContent = staticText;
       typingCursor.hidden = true;
 
       return;
