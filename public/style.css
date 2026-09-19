@@ -905,19 +905,6 @@ body.light .class-status.is-next {
   animation: deadline-urgent-pulse 1.6s ease-in-out infinite;
 }
 
-@keyframes schedule-now-pulse {
-  0%,
-  100% {
-    filter: brightness(1);
-    opacity: 1;
-  }
-
-  50% {
-    filter: brightness(0.2);
-    opacity: 0.82;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .class-status.is-now,
   .class-session.is-now .class-time {
@@ -1013,27 +1000,6 @@ body.light .class-status.is-next {
   letter-spacing: 0.04em;
 }
 
-.deadline-description {
-  margin: 10px 0 0;
-
-  color: var(--muted);
-
-  font-size: 0.88rem;
-  line-height: 1.6;
-}
-
-.deadline-time {
-  display: block;
-
-  margin-top: 18px;
-
-  color: var(--accent-start);
-
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
 @media (max-width: 560px) {
   .deadlines-list {
     margin-top: 28px;
@@ -1078,6 +1044,7 @@ body.light .class-status.is-next {
 
   font-size: 0.9rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .deadline-countdown {
