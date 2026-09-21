@@ -20,7 +20,7 @@ $deadlines = getPublishedDeadlines($pdo);
         deadlines · zaKNADka
     </title>
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=20260921-1">
 </head>
 
 <body>
@@ -325,20 +325,12 @@ $deadlines = getPublishedDeadlines($pdo);
                 <span>2026</span>
             </div>
 
-            <a
-                class="admin-link"
-                href="/admin/"
-                data-i18n="nav.admin">
-                Admin
-            </a>
-
         </footer>
 
     </div>
 
 
-    <script src="../script.js"></script>
-
+    <script src="../script.js?v=20260921-1"></script>
 </body>
 
 </html>

@@ -528,10 +528,8 @@ const translations = {
     "home.titleSecond": "Data Science",
     "home.navigationLabel": "Main navigation",
 
-    "nav.courses": "Courses",
     "nav.schedule": "Schedule",
     "nav.deadlines": "Deadlines",
-    "nav.admin": "Admin",
     "schedule.pageTitle": "schedule · zaKNADka",
     "schedule.eyebrow": "CDS · HSE Moscow",
     "schedule.title": "Schedule",
@@ -580,10 +578,8 @@ const translations = {
     "home.titleSecond": "Анализ данных",
     "home.navigationLabel": "Основная навигация",
 
-    "nav.courses": "Курсы",
     "nav.schedule": "Расписание",
     "nav.deadlines": "Дедлайны",
-    "nav.admin": "Админ",
     "schedule.pageTitle": "расписание · zaKNADka",
     "schedule.eyebrow": "КНАД · ВШЭ Москва",
     "schedule.title": "Расписание",

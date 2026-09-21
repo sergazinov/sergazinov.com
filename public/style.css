@@ -270,14 +270,6 @@ html[lang="ru"] .hero-title {
   opacity: 0.5;
 }
 
-.admin-link {
-  transition: color 0.2s ease;
-}
-
-.admin-link:hover {
-  color: var(--text);
-}
-
 /* ---------- TABLET ---------- */
 
 @media (max-width: 900px) {
@@ -387,14 +379,6 @@ html[lang="ru"] .hero-title {
     gap: 7px;
 
     text-align: center;
-  }
-
-  .admin-link {
-    order: 1;
-  }
-
-  .footer-identity {
-    order: 2;
   }
 }
 
