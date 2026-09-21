@@ -501,9 +501,9 @@ html[lang="ru"] .hero-title {
   line-height: 1.6;
 }
 
-/* ---------- SCHEDULE HEADER ---------- */
+/* ---------- INNER PAGE HEADER ---------- */
 
-.schedule-heading {
+.page-heading {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -534,7 +534,7 @@ html[lang="ru"] .hero-title {
   letter-spacing: 0.12em;
 }
 
-.schedule-controls {
+.page-controls {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -678,7 +678,7 @@ html[lang="ru"] .hero-title {
     padding: 42px 0 54px;
   }
 
-  .schedule-heading {
+  .page-heading {
     align-items: flex-start;
     flex-direction: column;
     gap: 22px;
@@ -688,20 +688,20 @@ html[lang="ru"] .hero-title {
     align-self: flex-start;
   }
 
+  .page-controls {
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .current-clock {
+    text-align: left;
+  }
+
   .schedule-week {
     grid-template-columns: 1fr 1fr;
   }
-}
-
-.schedule-controls {
-  width: 100%;
-
-  align-items: center;
-  justify-content: space-between;
-}
-
-.current-clock {
-  text-align: left;
 }
 
 /* =========================================================
@@ -736,7 +736,7 @@ html[lang="ru"] .hero-title {
     line-height: 1.55;
   }
 
-  .schedule-heading {
+  .page-heading {
     gap: 18px;
   }
 
@@ -781,32 +781,32 @@ html[lang="ru"] .hero-title {
     margin-bottom: 12px;
     padding-bottom: 11px;
   }
-}
 
-.schedule-controls {
-  width: 100%;
+  .page-controls {
+    width: 100%;
 
-  gap: 12px;
-}
+    gap: 12px;
+  }
 
-.current-clock {
-  min-width: 0;
-}
+  .current-clock {
+    min-width: 0;
+  }
 
-.current-clock-date {
-  font-size: 0.58rem;
-}
+  .current-clock-date {
+    font-size: 0.58rem;
+  }
 
-.current-clock-time {
-  font-size: 1.15rem;
-}
+  .current-clock-time {
+    font-size: 1.15rem;
+  }
 
-.current-clock-zone {
-  font-size: 0.56rem;
-}
+  .current-clock-zone {
+    font-size: 0.56rem;
+  }
 
-.schedule-timezone {
-  flex-shrink: 0;
+  .schedule-timezone {
+    flex-shrink: 0;
+  }
 }
 
 /* ---------- CLASS SESSIONS ---------- */
@@ -1010,15 +1010,6 @@ body.light .class-status.is-next {
     padding: 18px;
     border-radius: 15px;
   }
-}
-
-.deadlines-toolbar {
-  margin-top: 28px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
 }
 
 .deadline-meta {
