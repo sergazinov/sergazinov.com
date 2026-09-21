@@ -20,7 +20,7 @@ $deadlines = getPublishedDeadlines($pdo);
         deadlines · zaKNADka
     </title>
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=20260921-1">
 </head>
 
 <body>
@@ -90,74 +90,81 @@ $deadlines = getPublishedDeadlines($pdo);
                     CDS · HSE Moscow
                 </p>
 
-                <h1
-                    class="inner-title"
-                    data-i18n="deadlines.title">
-                    Deadlines
-                </h1>
+                <div class="page-heading">
 
-                <a
-                    class="inner-home-link"
-                    href="/"
-                    aria-label="zaKNADka home"
-                    data-i18n-aria-label="header.homeLabel">
-                    <svg
-                        class="inner-home-icon"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true">
-                        <path
-                            d="M3 10.5L12 3l9 7.5"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path
-                            d="M5.5 9.5V21h13V9.5"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path
-                            d="M9.5 21v-6h5v6"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </a>
+                    <div>
 
-                <p
-                    class="inner-description"
-                    data-i18n="deadlines.description">
-                    Upcoming coursework and submission deadlines.
-                </p>
+                        <h1
+                            class="inner-title"
+                            data-i18n="deadlines.title">
+                            Deadlines
+                        </h1>
 
+                        <a
+                            class="inner-home-link"
+                            href="/"
+                            aria-label="zaKNADka home"
+                            data-i18n-aria-label="header.homeLabel">
+                            <svg
+                                class="inner-home-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <path
+                                    d="M3 10.5L12 3l9 7.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M5.5 9.5V21h13V9.5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M9.5 21v-6h5v6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a>
 
-                <div class="deadlines-toolbar">
+                        <p
+                            class="inner-description"
+                            data-i18n="deadlines.description">
+                            Upcoming coursework and submission deadlines.
+                        </p>
 
-                    <div class="current-clock">
-                        <div class="current-clock-date" id="currentDate">—</div>
-
-                        <div class="current-clock-time" id="currentTime">--:--:--</div>
-
-                        <div
-                            class="current-clock-zone"
-                            id="currentTimezone">
-                            LOCAL TIME
-                        </div>
                     </div>
 
-                    <button
-                        class="schedule-timezone"
-                        id="timezoneToggle"
-                        type="button"
-                        aria-label="Switch deadline timezone"
-                        data-i18n-aria-label="deadlines.timezoneLabel">
-                        ASTANA TIME · UTC+5
-                    </button>
+                    <div class="page-controls">
+
+                        <div class="current-clock">
+                            <div class="current-clock-date" id="currentDate">—</div>
+
+                            <div class="current-clock-time" id="currentTime">--:--:--</div>
+
+                            <div
+                                class="current-clock-zone"
+                                id="currentTimezone">
+                                LOCAL TIME
+                            </div>
+                        </div>
+
+                        <button
+                            class="schedule-timezone"
+                            id="timezoneToggle"
+                            type="button"
+                            aria-label="Switch deadline timezone"
+                            data-i18n-aria-label="deadlines.timezoneLabel">
+                            ASTANA TIME · UTC+5
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -318,20 +325,12 @@ $deadlines = getPublishedDeadlines($pdo);
                 <span>2026</span>
             </div>
 
-            <a
-                class="admin-link"
-                href="/admin/"
-                data-i18n="nav.admin">
-                Admin
-            </a>
-
         </footer>
 
     </div>
 
 
-    <script src="../script.js"></script>
-
+    <script src="../script.js?v=20260921-1"></script>
 </body>
 
 </html>

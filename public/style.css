@@ -270,14 +270,6 @@ html[lang="ru"] .hero-title {
   opacity: 0.5;
 }
 
-.admin-link {
-  transition: color 0.2s ease;
-}
-
-.admin-link:hover {
-  color: var(--text);
-}
-
 /* ---------- TABLET ---------- */
 
 @media (max-width: 900px) {
@@ -388,14 +380,6 @@ html[lang="ru"] .hero-title {
 
     text-align: center;
   }
-
-  .admin-link {
-    order: 1;
-  }
-
-  .footer-identity {
-    order: 2;
-  }
 }
 
 /* ---------- SMALL / SHORT PHONES ---------- */
@@ -501,9 +485,9 @@ html[lang="ru"] .hero-title {
   line-height: 1.6;
 }
 
-/* ---------- SCHEDULE HEADER ---------- */
+/* ---------- INNER PAGE HEADER ---------- */
 
-.schedule-heading {
+.page-heading {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -534,7 +518,7 @@ html[lang="ru"] .hero-title {
   letter-spacing: 0.12em;
 }
 
-.schedule-controls {
+.page-controls {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -678,7 +662,7 @@ html[lang="ru"] .hero-title {
     padding: 42px 0 54px;
   }
 
-  .schedule-heading {
+  .page-heading {
     align-items: flex-start;
     flex-direction: column;
     gap: 22px;
@@ -688,20 +672,20 @@ html[lang="ru"] .hero-title {
     align-self: flex-start;
   }
 
+  .page-controls {
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .current-clock {
+    text-align: left;
+  }
+
   .schedule-week {
     grid-template-columns: 1fr 1fr;
   }
-}
-
-.schedule-controls {
-  width: 100%;
-
-  align-items: center;
-  justify-content: space-between;
-}
-
-.current-clock {
-  text-align: left;
 }
 
 /* =========================================================
@@ -736,7 +720,7 @@ html[lang="ru"] .hero-title {
     line-height: 1.55;
   }
 
-  .schedule-heading {
+  .page-heading {
     gap: 18px;
   }
 
@@ -781,32 +765,32 @@ html[lang="ru"] .hero-title {
     margin-bottom: 12px;
     padding-bottom: 11px;
   }
-}
 
-.schedule-controls {
-  width: 100%;
+  .page-controls {
+    width: 100%;
 
-  gap: 12px;
-}
+    gap: 12px;
+  }
 
-.current-clock {
-  min-width: 0;
-}
+  .current-clock {
+    min-width: 0;
+  }
 
-.current-clock-date {
-  font-size: 0.58rem;
-}
+  .current-clock-date {
+    font-size: 0.58rem;
+  }
 
-.current-clock-time {
-  font-size: 1.15rem;
-}
+  .current-clock-time {
+    font-size: 1.15rem;
+  }
 
-.current-clock-zone {
-  font-size: 0.56rem;
-}
+  .current-clock-zone {
+    font-size: 0.56rem;
+  }
 
-.schedule-timezone {
-  flex-shrink: 0;
+  .schedule-timezone {
+    flex-shrink: 0;
+  }
 }
 
 /* ---------- CLASS SESSIONS ---------- */
@@ -905,19 +889,6 @@ body.light .class-status.is-next {
   animation: deadline-urgent-pulse 1.6s ease-in-out infinite;
 }
 
-@keyframes schedule-now-pulse {
-  0%,
-  100% {
-    filter: brightness(1);
-    opacity: 1;
-  }
-
-  50% {
-    filter: brightness(0.2);
-    opacity: 0.82;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .class-status.is-now,
   .class-session.is-now .class-time {
@@ -1013,27 +984,6 @@ body.light .class-status.is-next {
   letter-spacing: 0.04em;
 }
 
-.deadline-description {
-  margin: 10px 0 0;
-
-  color: var(--muted);
-
-  font-size: 0.88rem;
-  line-height: 1.6;
-}
-
-.deadline-time {
-  display: block;
-
-  margin-top: 18px;
-
-  color: var(--accent-start);
-
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
 @media (max-width: 560px) {
   .deadlines-list {
     margin-top: 28px;
@@ -1044,15 +994,6 @@ body.light .class-status.is-next {
     padding: 18px;
     border-radius: 15px;
   }
-}
-
-.deadlines-toolbar {
-  margin-top: 28px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
 }
 
 .deadline-meta {
@@ -1078,6 +1019,7 @@ body.light .class-status.is-next {
 
   font-size: 0.9rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .deadline-countdown {

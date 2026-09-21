@@ -523,20 +523,15 @@ const translations = {
     "header.languageLabel": "Language",
     "header.themeLabel": "Toggle theme",
 
-    "home.eyebrow": "CDS · HSE MOSCOW",
+    "home.eyebrow": "CDS · HSE Moscow",
     "home.titleFirst": "Computing",
     "home.titleSecond": "Data Science",
-    "home.description":
-      "A personal learning hub documenting my journey through Full-Stack Development and the Computing & Data Science program at HSE Moscow.",
     "home.navigationLabel": "Main navigation",
 
-    "nav.courses": "Courses",
     "nav.schedule": "Schedule",
     "nav.deadlines": "Deadlines",
-    "nav.admin": "Admin",
-    "nav.home": "Home",
     "schedule.pageTitle": "schedule · zaKNADka",
-    "schedule.eyebrow": "CDS · HSE MOSCOW",
+    "schedule.eyebrow": "CDS · HSE Moscow",
     "schedule.title": "Schedule",
     "schedule.description":
       "Class schedule for HSE Computing and Data Science.",
@@ -564,14 +559,13 @@ const translations = {
 
     "deadlines.openAssignment": "Open assignment",
     "deadlines.pageTitle": "deadlines · zaKNADka",
-    "deadlines.eyebrow": "CDS · HSE MOSCOW",
+    "deadlines.eyebrow": "CDS · HSE Moscow",
     "deadlines.title": "Deadlines",
     "deadlines.description": "Upcoming coursework and submission deadlines.",
     "deadlines.timezoneLabel": "Switch deadline timezone",
     "deadlines.emptyTitle": "No deadlines yet.",
     "deadlines.emptyText": "Upcoming deadlines will appear here.",
     "deadlines.deadlineLabel": "Deadline",
-    "deadlines.dueIn": "Due in",
   },
 
   ru: {
@@ -579,20 +573,15 @@ const translations = {
     "header.languageLabel": "Язык",
     "header.themeLabel": "Переключить тему",
 
-    "home.eyebrow": "КНАД · ВШЭ МОСКВА",
+    "home.eyebrow": "КНАД · ВШЭ Москва",
     "home.titleFirst": "Компьютерные науки",
     "home.titleSecond": "Анализ данных",
-    "home.description":
-      "Мой учебный проект о Full-Stack разработке и обучении на программе «Компьютерные науки и анализ данных» в НИУ ВШЭ.",
     "home.navigationLabel": "Основная навигация",
 
-    "nav.courses": "Курсы",
     "nav.schedule": "Расписание",
     "nav.deadlines": "Дедлайны",
-    "nav.admin": "Админ",
-    "nav.home": "Главная",
     "schedule.pageTitle": "расписание · zaKNADka",
-    "schedule.eyebrow": "КНАД · ВШЭ МОСКВА",
+    "schedule.eyebrow": "КНАД · ВШЭ Москва",
     "schedule.title": "Расписание",
     "schedule.description":
       "Расписание занятий программы «Компьютерные науки и анализ данных» НИУ ВШЭ.",
@@ -620,14 +609,13 @@ const translations = {
 
     "deadlines.openAssignment": "Открыть задание",
     "deadlines.pageTitle": "дедлайны · zaKNADka",
-    "deadlines.eyebrow": "КНАД · ВШЭ МОСКВА",
+    "deadlines.eyebrow": "КНАД · ВШЭ Москва",
     "deadlines.title": "Дедлайны",
     "deadlines.description": "Предстоящие учебные задания и сроки сдачи.",
     "deadlines.timezoneLabel": "Переключить часовой пояс дедлайнов",
     "deadlines.emptyTitle": "Дедлайнов пока нет.",
     "deadlines.emptyText": "Предстоящие дедлайны появятся здесь.",
     "deadlines.deadlineLabel": "Дедлайн",
-    "deadlines.dueIn": "Осталось",
   },
 };
 
