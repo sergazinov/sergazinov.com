@@ -177,6 +177,49 @@ const schedules = {
   ],
 };
 
+function getAstanaDateKey(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Almaty",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+
+  const values = {};
+
+  parts.forEach((part) => {
+    if (part.type !== "literal") {
+      values[part.type] = part.value;
+    }
+  });
+
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function dateKeyToUtcDays(dateKey) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+
+  return Math.floor(Date.UTC(year, month - 1, day) / (24 * 60 * 60 * 1000));
+}
+
+function getScheduleDayDifference(fromDateKey, toDateKey) {
+  return dateKeyToUtcDays(toDateKey) - dateKeyToUtcDays(fromDateKey);
+}
+
+function formatScheduleOnlyDate(dateKey, language = getSiteLanguage()) {
+  const [, month, day] = dateKey.split("-");
+
+  return language === "ru" ? `ТОЛЬКО ${day}.${month}` : `ONLY ${day}.${month}`;
+}
+
+function shouldRenderScheduleSession(session, date = new Date()) {
+  if (!session.onlyDate) {
+    return true;
+  }
+
+  return session.onlyDate >= getAstanaDateKey(date);
+}
+
 function renderSchedule(group) {
   const scheduleWeek = document.getElementById("scheduleWeek");
 
@@ -186,12 +229,16 @@ function renderSchedule(group) {
 
   scheduleWeek.innerHTML = schedules[group]
     .map((day) => {
+      const visibleSessions = day.sessions.filter((session) =>
+        shouldRenderScheduleSession(session),
+      );
+
       const sessionsHtml =
-        day.sessions.length === 0
+        visibleSessions.length === 0
           ? `<div class="day-empty" data-i18n="schedule.freeDay">Free day</div>`
           : `
             <div class="class-list">
-              ${day.sessions
+              ${visibleSessions
                 .map((session) => {
                   const courseHtml = session.courseKey
                     ? `<strong data-i18n="${session.courseKey}">${session.course}</strong>`
@@ -214,13 +261,26 @@ function renderSchedule(group) {
                     `;
                   }
 
+                  const specialDateHtml = session.onlyDate
+                    ? `
+                      <span data-only-date-label="${session.onlyDate}">
+                        ${formatScheduleOnlyDate(session.onlyDate)}
+                      </span>
+                    `
+                    : "";
+
+                  const onlyDateAttribute = session.onlyDate
+                    ? ` data-only-date="${session.onlyDate}"`
+                    : "";
+
                   return `
-                    <div class="class-session">
+                    <div class="class-session"${onlyDateAttribute}>
                       <div class="class-time">${session.time}</div>
 
                       <div class="class-info">
                         ${courseHtml}
                         ${detailsHtml}
+                        ${specialDateHtml}
                       </div>
                     </div>
                   `;
@@ -429,6 +489,7 @@ function addScheduleStatus(session, type, minutes) {
 
 function updateScheduleStatus(date = new Date()) {
   const now = getAstanaNow(date);
+  const todayDateKey = getAstanaDateKey(date);
 
   let currentSession = null;
   let nextSession = null;
@@ -437,6 +498,34 @@ function updateScheduleStatus(date = new Date()) {
   scheduleSessions.forEach((session) => {
     session.element.classList.remove("is-now", "is-next");
     session.element.querySelector(".class-status")?.remove();
+
+    if (session.onlyDate) {
+      const dayDifference = getScheduleDayDifference(
+        todayDateKey,
+        session.onlyDate,
+      );
+
+      if (dayDifference < 0) {
+        return;
+      }
+
+      if (
+        dayDifference === 0 &&
+        now.minutes >= session.start &&
+        now.minutes < session.end
+      ) {
+        currentSession = session;
+      }
+
+      const wait = dayDifference * 1440 + session.start - now.minutes;
+
+      if (wait > 0 && wait < shortestWait) {
+        shortestWait = wait;
+        nextSession = session;
+      }
+
+      return;
+    }
 
     if (
       session.weekday === now.weekday &&
@@ -503,6 +592,7 @@ function rebuildScheduleStatus() {
         weekday,
         start: timeToMinutes(startTime),
         end: timeToMinutes(endTime),
+        onlyDate: sessionElement.dataset.onlyDate || null,
       });
     });
   });
@@ -918,6 +1008,13 @@ function applyLanguage(language) {
     if (dictionary[key]) {
       element.textContent = dictionary[key];
     }
+  });
+
+  document.querySelectorAll("[data-only-date-label]").forEach((element) => {
+    element.textContent = formatScheduleOnlyDate(
+      element.dataset.onlyDateLabel,
+      language,
+    );
   });
 
   document.querySelectorAll("[data-homework-title]").forEach((element) => {
