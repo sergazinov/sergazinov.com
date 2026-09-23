@@ -23,65 +23,676 @@ function getSiteLanguage() {
   return localStorage.getItem("siteLanguage") === "en" ? "en" : "ru";
 }
 
-function getScheduleTimezoneLabel(timezone, language = getSiteLanguage()) {
-  if (timezone === "moscow") {
-    return language === "ru" ? "МОСКВА · UTC+3" : "MOSCOW TIME · UTC+3";
+const schedules = {
+  261: [
+    {
+      day: "monday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Медведь Н.Ю.",
+        },
+        {
+          time: "18:20–19:40",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "tuesday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.russianHistory",
+          course: "Russian History",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лупарёва Н.Н.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лукьяненко Н.С.",
+        },
+        {
+          time: "18:20–19:40",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лукьяненко Н.С.",
+          onlyDate: "2026-10-20",
+        },
+      ],
+    },
+
+    {
+      day: "wednesday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+        {
+          time: "13:10–14:30",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Береснева Е.Н.",
+        },
+        {
+          time: "16:40–18:00",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "thursday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лукьяненко Н.С.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Медведь Н.Ю.",
+        },
+      ],
+    },
+
+    {
+      day: "friday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.english",
+          course: "English",
+          teacher: "Чантуридзе Ю.М.",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.english",
+          course: "English",
+          teacher: "Чантуридзе Ю.М.",
+        },
+        {
+          time: "15:00–16:20",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Береснева Е.Н.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лукьяненко Н.С.",
+          onlyDate: "2026-09-25",
+        },
+        {
+          time: "20:10–21:30",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+      ],
+    },
+
+    {
+      day: "saturday",
+      sessions: [
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+      ],
+    },
+
+    {
+      day: "sunday",
+      sessions: [],
+    },
+  ],
+
+  262: [
+    {
+      day: "monday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Медведь Н.Ю.",
+        },
+        {
+          time: "18:20–19:40",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+        {
+          time: "21:40–23:00",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "tuesday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.russianHistory",
+          course: "Russian History",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лупарёва Н.Н.",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Пономарчук А.С.",
+        },
+      ],
+    },
+
+    {
+      day: "wednesday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+        {
+          time: "16:40–18:00",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+        {
+          time: "18:20–19:40",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "thursday",
+      sessions: [
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Пономарчук А.С.",
+        },
+      ],
+    },
+
+    {
+      day: "friday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.english",
+          course: "English",
+          teacher: "Барановская Т.А.",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.english",
+          course: "English",
+          teacher: "Барановская Т.А.",
+        },
+        {
+          time: "21:40–23:00",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+      ],
+    },
+
+    {
+      day: "saturday",
+      sessions: [
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+      ],
+    },
+
+    {
+      day: "sunday",
+      sessions: [],
+    },
+  ],
+
+  263: [
+    {
+      day: "monday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Медведь Н.Ю.",
+        },
+        {
+          time: "18:20–19:40",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "tuesday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "18:20–19:40",
+          courseKey: "course.russianHistory",
+          course: "Russian History",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лупарёва Н.Н.",
+        },
+      ],
+    },
+
+    {
+      day: "wednesday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Савищенко В.Р.",
+        },
+        {
+          time: "16:40–18:00",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "thursday",
+      sessions: [],
+    },
+
+    {
+      day: "friday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.english",
+          course: "English",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.english",
+          course: "English",
+        },
+        {
+          time: "15:00–16:20",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Савищенко В.Р.",
+        },
+      ],
+    },
+
+    {
+      day: "saturday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Егорова А.Н.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Мажуга А.М.",
+        },
+      ],
+    },
+
+    {
+      day: "sunday",
+      sessions: [],
+    },
+  ],
+};
+
+function getAstanaDateKey(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Almaty",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+
+  const values = {};
+
+  parts.forEach((part) => {
+    if (part.type !== "literal") {
+      values[part.type] = part.value;
+    }
+  });
+
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function dateKeyToUtcDays(dateKey) {
+  const [year, month, day] = dateKey.split("-").map(Number);
+
+  return Math.floor(Date.UTC(year, month - 1, day) / (24 * 60 * 60 * 1000));
+}
+
+function getScheduleDayDifference(fromDateKey, toDateKey) {
+  return dateKeyToUtcDays(toDateKey) - dateKeyToUtcDays(fromDateKey);
+}
+
+function formatScheduleOnlyDate(dateKey, language = getSiteLanguage()) {
+  const [, month, day] = dateKey.split("-");
+
+  return language === "ru" ? `ТОЛЬКО ${day}.${month}` : `ONLY ${day}.${month}`;
+}
+
+function shouldRenderScheduleSession(session, date = new Date()) {
+  if (!session.onlyDate) {
+    return true;
   }
 
-  return language === "ru" ? "АСТАНА · UTC+5" : "ASTANA TIME · UTC+5";
+  return session.onlyDate >= getAstanaDateKey(date);
+}
+
+function renderSchedule(group) {
+  const scheduleWeek = document.getElementById("scheduleWeek");
+
+  if (!scheduleWeek || !schedules[group]) {
+    return;
+  }
+
+  scheduleWeek.innerHTML = schedules[group]
+    .map((day) => {
+      const visibleSessions = day.sessions.filter((session) =>
+        shouldRenderScheduleSession(session),
+      );
+
+      const sessionsHtml =
+        visibleSessions.length === 0
+          ? `<div class="day-empty" data-i18n="schedule.freeDay">Free day</div>`
+          : `
+            <div class="class-list">
+              ${visibleSessions
+                .map((session) => {
+                  const courseHtml = session.courseKey
+                    ? `<strong data-i18n="${session.courseKey}">${session.course}</strong>`
+                    : `<strong>${session.course}</strong>`;
+
+                  let detailsHtml = "";
+
+                  if (session.typeKey || session.teacher) {
+                    const typeHtml = session.typeKey
+                      ? `<span data-i18n="${session.typeKey}">${session.type}</span>`
+                      : "";
+
+                    const separator =
+                      session.typeKey && session.teacher ? " · " : "";
+
+                    detailsHtml = `
+                      <span>
+                        ${typeHtml}${separator}${session.teacher || ""}
+                      </span>
+                    `;
+                  }
+
+                  const specialDateHtml = session.onlyDate
+                    ? `
+                      <span data-only-date-label="${session.onlyDate}">
+                        ${formatScheduleOnlyDate(session.onlyDate)}
+                      </span>
+                    `
+                    : "";
+
+                  const onlyDateAttribute = session.onlyDate
+                    ? ` data-only-date="${session.onlyDate}"`
+                    : "";
+
+                  return `
+                    <div class="class-session"${onlyDateAttribute}>
+                      <div class="class-time">${session.time}</div>
+
+                      <div class="class-info">
+                        ${courseHtml}
+                        ${detailsHtml}
+                        ${specialDateHtml}
+                      </div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          `;
+
+      return `
+        <article class="schedule-day">
+          <div class="day-header">
+            <span data-i18n="day.${day.day}">
+              ${day.day}
+            </span>
+          </div>
+
+          ${sessionsHtml}
+        </article>
+      `;
+    })
+    .join("");
+}
+
+renderSchedule("263");
+
+function getScheduleTimezoneLabel(timezone, language = getSiteLanguage()) {
+  if (timezone === "moscow") {
+    return language === "ru" ? "МОСКВА · UTC+3" : "MOSCOW · UTC+3";
+  }
+
+  return language === "ru" ? "АСТАНА · UTC+5" : "ASTANA · UTC+5";
+}
+
+function shiftTime(time, minutesToAdd) {
+  const [hours, minutes] = time.split(":").map(Number);
+
+  let totalMinutes = hours * 60 + minutes + minutesToAdd;
+
+  totalMinutes = ((totalMinutes % 1440) + 1440) % 1440;
+
+  const newHours = Math.floor(totalMinutes / 60);
+  const newMinutes = totalMinutes % 60;
+
+  return `${String(newHours).padStart(2, "0")}:${String(newMinutes).padStart(2, "0")}`;
+}
+
+function convertTimeRange(timeRange, timezone) {
+  const match = timeRange.match(/(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})/);
+
+  if (!match) {
+    return timeRange;
+  }
+
+  const [, startTime, endTime] = match;
+
+  if (timezone === "moscow") {
+    return `${shiftTime(startTime, -120)}–${shiftTime(endTime, -120)}`;
+  }
+
+  return `${startTime}–${endTime}`;
+}
+
+function applyScheduleTimezone(timezone) {
+  document.querySelectorAll(".class-time").forEach((timeElement) => {
+    if (!timeElement.dataset.astanaTime) {
+      timeElement.dataset.astanaTime = timeElement.textContent.trim();
+    }
+
+    const astanaTime = timeElement.dataset.astanaTime;
+
+    timeElement.textContent = convertTimeRange(astanaTime, timezone);
+  });
+
+  if (timezoneToggle) {
+    timezoneToggle.textContent = getScheduleTimezoneLabel(timezone);
+  }
+
+  localStorage.setItem("scheduleTimezone", timezone);
 }
 
 if (timezoneToggle) {
-  const classTimes = document.querySelectorAll(".class-time");
-
-  classTimes.forEach((timeElement) => {
-    timeElement.dataset.astanaTime = timeElement.textContent.trim();
-  });
-
-  function shiftTime(time, minutesToAdd) {
-    const [hours, minutes] = time.split(":").map(Number);
-
-    let totalMinutes = hours * 60 + minutes + minutesToAdd;
-
-    totalMinutes = ((totalMinutes % 1440) + 1440) % 1440;
-
-    const newHours = Math.floor(totalMinutes / 60);
-    const newMinutes = totalMinutes % 60;
-
-    return `${String(newHours).padStart(2, "0")}:${String(newMinutes).padStart(2, "0")}`;
-  }
-
-  function convertTimeRange(timeRange, timezone) {
-    const match = timeRange.match(/(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})/);
-
-    if (!match) {
-      return timeRange;
-    }
-
-    const [, startTime, endTime] = match;
-
-    if (timezone === "moscow") {
-      return `${shiftTime(startTime, -120)}–${shiftTime(endTime, -120)}`;
-    }
-
-    return `${startTime}–${endTime}`;
-  }
-
-  function applyTimezone(timezone) {
-    classTimes.forEach((timeElement) => {
-      const astanaTime = timeElement.dataset.astanaTime;
-
-      timeElement.textContent = convertTimeRange(astanaTime, timezone);
-    });
-
-    timezoneToggle.textContent = getScheduleTimezoneLabel(timezone);
-
-    localStorage.setItem("scheduleTimezone", timezone);
-  }
-
   const savedTimezone = localStorage.getItem("scheduleTimezone") || "astana";
 
-  applyTimezone(savedTimezone);
+  applyScheduleTimezone(savedTimezone);
 
   timezoneToggle.addEventListener("click", () => {
     const currentTimezone =
@@ -89,16 +700,197 @@ if (timezoneToggle) {
 
     const newTimezone = currentTimezone === "astana" ? "moscow" : "astana";
 
-    applyTimezone(newTimezone);
+    applyScheduleTimezone(newTimezone);
   });
 }
 
 let scheduleStatusUpdater = null;
+let scheduleSessions = [];
 
-const scheduleDays = Array.from(document.querySelectorAll(".schedule-day"));
+function timeToMinutes(time) {
+  const [hours, minutes] = time.split(":").map(Number);
 
-if (scheduleDays.length > 0) {
-  const scheduleSessions = [];
+  return hours * 60 + minutes;
+}
+
+function getAstanaNow(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Almaty",
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+
+  const values = {};
+
+  parts.forEach((part) => {
+    if (part.type !== "literal") {
+      values[part.type] = part.value;
+    }
+  });
+
+  const weekdays = {
+    Mon: 1,
+    Tue: 2,
+    Wed: 3,
+    Thu: 4,
+    Fri: 5,
+    Sat: 6,
+    Sun: 7,
+  };
+
+  return {
+    weekday: weekdays[values.weekday],
+    minutes:
+      Number(values.hour) * 60 +
+      Number(values.minute) +
+      Number(values.second) / 60,
+  };
+}
+
+function formatScheduleDuration(minutes) {
+  const language = getSiteLanguage();
+  const totalMinutes = Math.max(1, Math.ceil(minutes));
+
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  const remainingMinutes = totalMinutes % 60;
+
+  const units =
+    language === "ru"
+      ? { day: "Д", hour: "Ч", minute: "М" }
+      : { day: "D", hour: "H", minute: "M" };
+
+  const parts = [];
+
+  if (days > 0) {
+    parts.push(`${days}${units.day}`);
+  }
+
+  if (hours > 0) {
+    parts.push(`${hours}${units.hour}`);
+  }
+
+  if (remainingMinutes > 0 || parts.length === 0) {
+    parts.push(`${remainingMinutes}${units.minute}`);
+  }
+
+  return parts.join(" · ");
+}
+
+function addScheduleStatus(session, type, minutes) {
+  const language = getSiteLanguage();
+
+  const labels =
+    language === "ru"
+      ? {
+          now: "СЕЙЧАС",
+          next: "ДАЛЬШЕ",
+          endsIn: "ДО КОНЦА",
+          startsIn: "НАЧАЛО ЧЕРЕЗ",
+        }
+      : {
+          now: "NOW",
+          next: "NEXT",
+          endsIn: "ENDS IN",
+          startsIn: "STARTS IN",
+        };
+
+  const statusElement = document.createElement("div");
+
+  statusElement.className = `class-status is-${type}`;
+
+  if (type === "now") {
+    statusElement.textContent =
+      `${labels.now} · ${labels.endsIn} ` + formatScheduleDuration(minutes);
+  } else {
+    statusElement.textContent =
+      `${labels.next} · ${labels.startsIn} ` + formatScheduleDuration(minutes);
+  }
+
+  session.element.querySelector(".class-info")?.appendChild(statusElement);
+
+  session.element.classList.add(`is-${type}`);
+}
+
+function updateScheduleStatus(date = new Date()) {
+  const now = getAstanaNow(date);
+  const todayDateKey = getAstanaDateKey(date);
+
+  let currentSession = null;
+  let nextSession = null;
+  let shortestWait = Infinity;
+
+  scheduleSessions.forEach((session) => {
+    session.element.classList.remove("is-now", "is-next");
+    session.element.querySelector(".class-status")?.remove();
+
+    if (session.onlyDate) {
+      const dayDifference = getScheduleDayDifference(
+        todayDateKey,
+        session.onlyDate,
+      );
+
+      if (dayDifference < 0) {
+        return;
+      }
+
+      if (
+        dayDifference === 0 &&
+        now.minutes >= session.start &&
+        now.minutes < session.end
+      ) {
+        currentSession = session;
+      }
+
+      const wait = dayDifference * 1440 + session.start - now.minutes;
+
+      if (wait > 0 && wait < shortestWait) {
+        shortestWait = wait;
+        nextSession = session;
+      }
+
+      return;
+    }
+
+    if (
+      session.weekday === now.weekday &&
+      now.minutes >= session.start &&
+      now.minutes < session.end
+    ) {
+      currentSession = session;
+    }
+
+    let wait =
+      ((session.weekday - now.weekday + 7) % 7) * 1440 +
+      session.start -
+      now.minutes;
+
+    if (wait <= 0) {
+      wait += 7 * 1440;
+    }
+
+    if (wait < shortestWait) {
+      shortestWait = wait;
+      nextSession = session;
+    }
+  });
+
+  if (currentSession) {
+    addScheduleStatus(currentSession, "now", currentSession.end - now.minutes);
+  }
+
+  if (nextSession) {
+    addScheduleStatus(nextSession, "next", shortestWait);
+  }
+}
+
+function rebuildScheduleStatus() {
+  scheduleSessions = [];
+
+  const scheduleDays = Array.from(document.querySelectorAll(".schedule-day"));
 
   scheduleDays.forEach((dayElement, dayIndex) => {
     const weekday = dayIndex + 1;
@@ -123,176 +915,74 @@ if (scheduleDays.length > 0) {
 
       const [, startTime, endTime] = match;
 
-      function timeToMinutes(time) {
-        const [hours, minutes] = time.split(":").map(Number);
-
-        return hours * 60 + minutes;
-      }
-
       scheduleSessions.push({
         element: sessionElement,
         weekday,
         start: timeToMinutes(startTime),
         end: timeToMinutes(endTime),
+        onlyDate: sessionElement.dataset.onlyDate || null,
       });
     });
   });
 
-  function getAstanaNow(date = new Date()) {
-    const parts = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Asia/Almaty",
-      weekday: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    }).formatToParts(date);
-
-    const values = {};
-
-    parts.forEach((part) => {
-      if (part.type !== "literal") {
-        values[part.type] = part.value;
-      }
-    });
-
-    const weekdays = {
-      Mon: 1,
-      Tue: 2,
-      Wed: 3,
-      Thu: 4,
-      Fri: 5,
-      Sat: 6,
-      Sun: 7,
-    };
-
-    return {
-      weekday: weekdays[values.weekday],
-      minutes:
-        Number(values.hour) * 60 +
-        Number(values.minute) +
-        Number(values.second) / 60,
-    };
-  }
-
-  function formatScheduleDuration(minutes) {
-    const language = getSiteLanguage();
-    const totalMinutes = Math.max(1, Math.ceil(minutes));
-
-    const days = Math.floor(totalMinutes / 1440);
-    const hours = Math.floor((totalMinutes % 1440) / 60);
-    const remainingMinutes = totalMinutes % 60;
-
-    const units =
-      language === "ru"
-        ? { day: "Д", hour: "Ч", minute: "М" }
-        : { day: "D", hour: "H", minute: "M" };
-
-    const parts = [];
-
-    if (days > 0) {
-      parts.push(`${days}${units.day}`);
-    }
-
-    if (hours > 0) {
-      parts.push(`${hours}${units.hour}`);
-    }
-
-    if (remainingMinutes > 0 || parts.length === 0) {
-      parts.push(`${remainingMinutes}${units.minute}`);
-    }
-
-    return parts.join(" · ");
-  }
-
-  function addScheduleStatus(session, type, minutes) {
-    const language = getSiteLanguage();
-
-    const labels =
-      language === "ru"
-        ? {
-            now: "СЕЙЧАС",
-            next: "ДАЛЬШЕ",
-            endsIn: "ДО КОНЦА",
-            startsIn: "НАЧАЛО ЧЕРЕЗ",
-          }
-        : {
-            now: "NOW",
-            next: "NEXT",
-            endsIn: "ENDS IN",
-            startsIn: "STARTS IN",
-          };
-
-    const statusElement = document.createElement("div");
-
-    statusElement.className = `class-status is-${type}`;
-
-    if (type === "now") {
-      statusElement.textContent =
-        `${labels.now} · ${labels.endsIn} ` + formatScheduleDuration(minutes);
-    } else {
-      statusElement.textContent =
-        `${labels.next} · ${labels.startsIn} ` +
-        formatScheduleDuration(minutes);
-    }
-
-    session.element.querySelector(".class-info")?.appendChild(statusElement);
-
-    session.element.classList.add(`is-${type}`);
-  }
-
-  function updateScheduleStatus(date = new Date()) {
-    const now = getAstanaNow(date);
-
-    let currentSession = null;
-    let nextSession = null;
-    let shortestWait = Infinity;
-
-    scheduleSessions.forEach((session) => {
-      session.element.classList.remove("is-now", "is-next");
-      session.element.querySelector(".class-status")?.remove();
-
-      if (
-        session.weekday === now.weekday &&
-        now.minutes >= session.start &&
-        now.minutes < session.end
-      ) {
-        currentSession = session;
-      }
-
-      let wait =
-        ((session.weekday - now.weekday + 7) % 7) * 1440 +
-        session.start -
-        now.minutes;
-
-      if (wait <= 0) {
-        wait += 7 * 1440;
-      }
-
-      if (wait < shortestWait) {
-        shortestWait = wait;
-        nextSession = session;
-      }
-    });
-
-    if (currentSession) {
-      addScheduleStatus(
-        currentSession,
-        "now",
-        currentSession.end - now.minutes,
-      );
-    }
-
-    if (nextSession) {
-      addScheduleStatus(nextSession, "next", shortestWait);
-    }
-  }
-
   scheduleStatusUpdater = updateScheduleStatus;
 
   updateScheduleStatus();
+}
 
-  setInterval(updateScheduleStatus, 30000);
+setInterval(() => {
+  if (scheduleStatusUpdater) {
+    scheduleStatusUpdater();
+  }
+}, 30000);
+
+const scheduleWeek = document.getElementById("scheduleWeek");
+
+if (scheduleWeek) {
+  const groupButtons = document.querySelectorAll(
+    ".group-switcher [data-group]",
+  );
+
+  function selectScheduleGroup(group, persist = true) {
+    if (!schedules[group]) {
+      return;
+    }
+
+    renderSchedule(group);
+
+    groupButtons.forEach((button) => {
+      const isActive = button.dataset.group === group;
+
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    if (persist) {
+      localStorage.setItem("scheduleGroup", group);
+    }
+
+    const timezone =
+      localStorage.getItem("scheduleTimezone") === "moscow"
+        ? "moscow"
+        : "astana";
+
+    applyScheduleTimezone(timezone);
+    rebuildScheduleStatus();
+  }
+
+  groupButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectScheduleGroup(button.dataset.group);
+
+      applyLanguage(getCurrentLanguage());
+    });
+  });
+
+  const savedGroup = localStorage.getItem("scheduleGroup");
+
+  const initialGroup = savedGroup && schedules[savedGroup] ? savedGroup : "263";
+
+  selectScheduleGroup(initialGroup, false);
 }
 
 const currentDateElement = document.getElementById("currentDate");
@@ -646,6 +1336,13 @@ function applyLanguage(language) {
     if (dictionary[key]) {
       element.textContent = dictionary[key];
     }
+  });
+
+  document.querySelectorAll("[data-only-date-label]").forEach((element) => {
+    element.textContent = formatScheduleOnlyDate(
+      element.dataset.onlyDateLabel,
+      language,
+    );
   });
 
   document.querySelectorAll("[data-homework-title]").forEach((element) => {
