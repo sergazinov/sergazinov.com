@@ -330,7 +330,7 @@ $deadlines = getPublishedDeadlines($pdo);
     </div>
 
 
-    <script src="../script.js?v=20260921-1"></script>
+    <script src="../script.js?v=20260923-1"></script>
 </body>
 
 </html>
