@@ -24,6 +24,334 @@ function getSiteLanguage() {
 }
 
 const schedules = {
+  261: [
+    {
+      day: "monday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Медведь Н.Ю.",
+        },
+        {
+          time: "18:20–19:40",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "tuesday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.russianHistory",
+          course: "Russian History",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лупарёва Н.Н.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лукьяненко Н.С.",
+        },
+        {
+          time: "18:20–19:40",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лукьяненко Н.С.",
+          onlyDate: "2026-10-20",
+        },
+      ],
+    },
+
+    {
+      day: "wednesday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+        {
+          time: "13:10–14:30",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Береснева Е.Н.",
+        },
+        {
+          time: "16:40–18:00",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "thursday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лукьяненко Н.С.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Медведь Н.Ю.",
+        },
+      ],
+    },
+
+    {
+      day: "friday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.english",
+          course: "English",
+          teacher: "Чантуридзе Ю.М.",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.english",
+          course: "English",
+          teacher: "Чантуридзе Ю.М.",
+        },
+        {
+          time: "15:00–16:20",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Береснева Е.Н.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лукьяненко Н.С.",
+          onlyDate: "2026-09-25",
+        },
+        {
+          time: "20:10–21:30",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+      ],
+    },
+
+    {
+      day: "saturday",
+      sessions: [
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+      ],
+    },
+
+    {
+      day: "sunday",
+      sessions: [],
+    },
+  ],
+
+  262: [
+    {
+      day: "monday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Медведь Н.Ю.",
+        },
+        {
+          time: "18:20–19:40",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+        {
+          time: "21:40–23:00",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "tuesday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.russianHistory",
+          course: "Russian History",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лупарёва Н.Н.",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Пономарчук А.С.",
+        },
+      ],
+    },
+
+    {
+      day: "wednesday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+        {
+          time: "16:40–18:00",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+        {
+          time: "18:20–19:40",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "thursday",
+      sessions: [
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Пономарчук А.С.",
+        },
+      ],
+    },
+
+    {
+      day: "friday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.english",
+          course: "English",
+          teacher: "Барановская Т.А.",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.english",
+          course: "English",
+          teacher: "Барановская Т.А.",
+        },
+        {
+          time: "21:40–23:00",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+      ],
+    },
+
+    {
+      day: "saturday",
+      sessions: [
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+      ],
+    },
+
+    {
+      day: "sunday",
+      sessions: [],
+    },
+  ],
+
   263: [
     {
       day: "monday",
