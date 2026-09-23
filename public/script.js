@@ -23,6 +23,229 @@ function getSiteLanguage() {
   return localStorage.getItem("siteLanguage") === "en" ? "en" : "ru";
 }
 
+const schedules = {
+  263: [
+    {
+      day: "monday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Медведь Н.Ю.",
+        },
+        {
+          time: "18:20–19:40",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "tuesday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.statehood",
+          course: "Russian Statehood",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Зубков А.В.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "18:20–19:40",
+          courseKey: "course.russianHistory",
+          course: "Russian History",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Лупарёва Н.Н.",
+        },
+      ],
+    },
+
+    {
+      day: "wednesday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Савищенко В.Р.",
+        },
+        {
+          time: "16:40–18:00",
+          course: "C++",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Горденко М.К.",
+        },
+      ],
+    },
+
+    {
+      day: "thursday",
+      sessions: [],
+    },
+
+    {
+      day: "friday",
+      sessions: [
+        {
+          time: "11:30–12:50",
+          courseKey: "course.english",
+          course: "English",
+        },
+        {
+          time: "13:10–14:30",
+          courseKey: "course.english",
+          course: "English",
+        },
+        {
+          time: "15:00–16:20",
+          course: "C++",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Савищенко В.Р.",
+        },
+      ],
+    },
+
+    {
+      day: "saturday",
+      sessions: [
+        {
+          time: "13:10–14:30",
+          courseKey: "course.linearAlgebra",
+          course: "Linear Algebra",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Егорова А.Н.",
+        },
+        {
+          time: "15:00–16:20",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.lecture",
+          type: "Lecture",
+          teacher: "Мажуга А.М.",
+        },
+        {
+          time: "16:40–18:00",
+          courseKey: "course.discreteMath",
+          course: "Discrete Mathematics",
+          typeKey: "class.seminar",
+          type: "Seminar",
+          teacher: "Мажуга А.М.",
+        },
+      ],
+    },
+
+    {
+      day: "sunday",
+      sessions: [],
+    },
+  ],
+};
+
+function renderSchedule(group) {
+  const scheduleWeek = document.getElementById("scheduleWeek");
+
+  if (!scheduleWeek || !schedules[group]) {
+    return;
+  }
+
+  scheduleWeek.innerHTML = schedules[group]
+    .map((day) => {
+      const sessionsHtml =
+        day.sessions.length === 0
+          ? `<div class="day-empty" data-i18n="schedule.freeDay">Free day</div>`
+          : `
+            <div class="class-list">
+              ${day.sessions
+                .map((session) => {
+                  const courseHtml = session.courseKey
+                    ? `<strong data-i18n="${session.courseKey}">${session.course}</strong>`
+                    : `<strong>${session.course}</strong>`;
+
+                  let detailsHtml = "";
+
+                  if (session.typeKey || session.teacher) {
+                    const typeHtml = session.typeKey
+                      ? `<span data-i18n="${session.typeKey}">${session.type}</span>`
+                      : "";
+
+                    const separator =
+                      session.typeKey && session.teacher ? " · " : "";
+
+                    detailsHtml = `
+                      <span>
+                        ${typeHtml}${separator}${session.teacher || ""}
+                      </span>
+                    `;
+                  }
+
+                  return `
+                    <div class="class-session">
+                      <div class="class-time">${session.time}</div>
+
+                      <div class="class-info">
+                        ${courseHtml}
+                        ${detailsHtml}
+                      </div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          `;
+
+      return `
+        <article class="schedule-day">
+          <div class="day-header">
+            <span data-i18n="day.${day.day}">
+              ${day.day}
+            </span>
+          </div>
+
+          ${sessionsHtml}
+        </article>
+      `;
+    })
+    .join("");
+}
+
+renderSchedule("263");
+
 function getScheduleTimezoneLabel(timezone, language = getSiteLanguage()) {
   if (timezone === "moscow") {
     return language === "ru" ? "МОСКВА · UTC+3" : "MOSCOW TIME · UTC+3";
