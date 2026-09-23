@@ -248,63 +248,63 @@ renderSchedule("263");
 
 function getScheduleTimezoneLabel(timezone, language = getSiteLanguage()) {
   if (timezone === "moscow") {
-    return language === "ru" ? "МОСКВА · UTC+3" : "MOSCOW TIME · UTC+3";
+    return language === "ru" ? "МОСКВА · UTC+3" : "MOSCOW · UTC+3";
   }
 
-  return language === "ru" ? "АСТАНА · UTC+5" : "ASTANA TIME · UTC+5";
+  return language === "ru" ? "АСТАНА · UTC+5" : "ASTANA · UTC+5";
+}
+
+function shiftTime(time, minutesToAdd) {
+  const [hours, minutes] = time.split(":").map(Number);
+
+  let totalMinutes = hours * 60 + minutes + minutesToAdd;
+
+  totalMinutes = ((totalMinutes % 1440) + 1440) % 1440;
+
+  const newHours = Math.floor(totalMinutes / 60);
+  const newMinutes = totalMinutes % 60;
+
+  return `${String(newHours).padStart(2, "0")}:${String(newMinutes).padStart(2, "0")}`;
+}
+
+function convertTimeRange(timeRange, timezone) {
+  const match = timeRange.match(/(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})/);
+
+  if (!match) {
+    return timeRange;
+  }
+
+  const [, startTime, endTime] = match;
+
+  if (timezone === "moscow") {
+    return `${shiftTime(startTime, -120)}–${shiftTime(endTime, -120)}`;
+  }
+
+  return `${startTime}–${endTime}`;
+}
+
+function applyScheduleTimezone(timezone) {
+  document.querySelectorAll(".class-time").forEach((timeElement) => {
+    if (!timeElement.dataset.astanaTime) {
+      timeElement.dataset.astanaTime = timeElement.textContent.trim();
+    }
+
+    const astanaTime = timeElement.dataset.astanaTime;
+
+    timeElement.textContent = convertTimeRange(astanaTime, timezone);
+  });
+
+  if (timezoneToggle) {
+    timezoneToggle.textContent = getScheduleTimezoneLabel(timezone);
+  }
+
+  localStorage.setItem("scheduleTimezone", timezone);
 }
 
 if (timezoneToggle) {
-  const classTimes = document.querySelectorAll(".class-time");
-
-  classTimes.forEach((timeElement) => {
-    timeElement.dataset.astanaTime = timeElement.textContent.trim();
-  });
-
-  function shiftTime(time, minutesToAdd) {
-    const [hours, minutes] = time.split(":").map(Number);
-
-    let totalMinutes = hours * 60 + minutes + minutesToAdd;
-
-    totalMinutes = ((totalMinutes % 1440) + 1440) % 1440;
-
-    const newHours = Math.floor(totalMinutes / 60);
-    const newMinutes = totalMinutes % 60;
-
-    return `${String(newHours).padStart(2, "0")}:${String(newMinutes).padStart(2, "0")}`;
-  }
-
-  function convertTimeRange(timeRange, timezone) {
-    const match = timeRange.match(/(\d{1,2}:\d{2})\s*[–-]\s*(\d{1,2}:\d{2})/);
-
-    if (!match) {
-      return timeRange;
-    }
-
-    const [, startTime, endTime] = match;
-
-    if (timezone === "moscow") {
-      return `${shiftTime(startTime, -120)}–${shiftTime(endTime, -120)}`;
-    }
-
-    return `${startTime}–${endTime}`;
-  }
-
-  function applyTimezone(timezone) {
-    classTimes.forEach((timeElement) => {
-      const astanaTime = timeElement.dataset.astanaTime;
-
-      timeElement.textContent = convertTimeRange(astanaTime, timezone);
-    });
-
-    timezoneToggle.textContent = getScheduleTimezoneLabel(timezone);
-
-    localStorage.setItem("scheduleTimezone", timezone);
-  }
-
   const savedTimezone = localStorage.getItem("scheduleTimezone") || "astana";
 
-  applyTimezone(savedTimezone);
+  applyScheduleTimezone(savedTimezone);
 
   timezoneToggle.addEventListener("click", () => {
     const currentTimezone =
@@ -312,16 +312,168 @@ if (timezoneToggle) {
 
     const newTimezone = currentTimezone === "astana" ? "moscow" : "astana";
 
-    applyTimezone(newTimezone);
+    applyScheduleTimezone(newTimezone);
   });
 }
 
 let scheduleStatusUpdater = null;
+let scheduleSessions = [];
 
-const scheduleDays = Array.from(document.querySelectorAll(".schedule-day"));
+function timeToMinutes(time) {
+  const [hours, minutes] = time.split(":").map(Number);
 
-if (scheduleDays.length > 0) {
-  const scheduleSessions = [];
+  return hours * 60 + minutes;
+}
+
+function getAstanaNow(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Almaty",
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+
+  const values = {};
+
+  parts.forEach((part) => {
+    if (part.type !== "literal") {
+      values[part.type] = part.value;
+    }
+  });
+
+  const weekdays = {
+    Mon: 1,
+    Tue: 2,
+    Wed: 3,
+    Thu: 4,
+    Fri: 5,
+    Sat: 6,
+    Sun: 7,
+  };
+
+  return {
+    weekday: weekdays[values.weekday],
+    minutes:
+      Number(values.hour) * 60 +
+      Number(values.minute) +
+      Number(values.second) / 60,
+  };
+}
+
+function formatScheduleDuration(minutes) {
+  const language = getSiteLanguage();
+  const totalMinutes = Math.max(1, Math.ceil(minutes));
+
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  const remainingMinutes = totalMinutes % 60;
+
+  const units =
+    language === "ru"
+      ? { day: "Д", hour: "Ч", minute: "М" }
+      : { day: "D", hour: "H", minute: "M" };
+
+  const parts = [];
+
+  if (days > 0) {
+    parts.push(`${days}${units.day}`);
+  }
+
+  if (hours > 0) {
+    parts.push(`${hours}${units.hour}`);
+  }
+
+  if (remainingMinutes > 0 || parts.length === 0) {
+    parts.push(`${remainingMinutes}${units.minute}`);
+  }
+
+  return parts.join(" · ");
+}
+
+function addScheduleStatus(session, type, minutes) {
+  const language = getSiteLanguage();
+
+  const labels =
+    language === "ru"
+      ? {
+          now: "СЕЙЧАС",
+          next: "ДАЛЬШЕ",
+          endsIn: "ДО КОНЦА",
+          startsIn: "НАЧАЛО ЧЕРЕЗ",
+        }
+      : {
+          now: "NOW",
+          next: "NEXT",
+          endsIn: "ENDS IN",
+          startsIn: "STARTS IN",
+        };
+
+  const statusElement = document.createElement("div");
+
+  statusElement.className = `class-status is-${type}`;
+
+  if (type === "now") {
+    statusElement.textContent =
+      `${labels.now} · ${labels.endsIn} ` + formatScheduleDuration(minutes);
+  } else {
+    statusElement.textContent =
+      `${labels.next} · ${labels.startsIn} ` + formatScheduleDuration(minutes);
+  }
+
+  session.element.querySelector(".class-info")?.appendChild(statusElement);
+
+  session.element.classList.add(`is-${type}`);
+}
+
+function updateScheduleStatus(date = new Date()) {
+  const now = getAstanaNow(date);
+
+  let currentSession = null;
+  let nextSession = null;
+  let shortestWait = Infinity;
+
+  scheduleSessions.forEach((session) => {
+    session.element.classList.remove("is-now", "is-next");
+    session.element.querySelector(".class-status")?.remove();
+
+    if (
+      session.weekday === now.weekday &&
+      now.minutes >= session.start &&
+      now.minutes < session.end
+    ) {
+      currentSession = session;
+    }
+
+    let wait =
+      ((session.weekday - now.weekday + 7) % 7) * 1440 +
+      session.start -
+      now.minutes;
+
+    if (wait <= 0) {
+      wait += 7 * 1440;
+    }
+
+    if (wait < shortestWait) {
+      shortestWait = wait;
+      nextSession = session;
+    }
+  });
+
+  if (currentSession) {
+    addScheduleStatus(currentSession, "now", currentSession.end - now.minutes);
+  }
+
+  if (nextSession) {
+    addScheduleStatus(nextSession, "next", shortestWait);
+  }
+}
+
+function rebuildScheduleStatus() {
+  scheduleSessions = [];
+
+  const scheduleDays = Array.from(document.querySelectorAll(".schedule-day"));
 
   scheduleDays.forEach((dayElement, dayIndex) => {
     const weekday = dayIndex + 1;
@@ -346,12 +498,6 @@ if (scheduleDays.length > 0) {
 
       const [, startTime, endTime] = match;
 
-      function timeToMinutes(time) {
-        const [hours, minutes] = time.split(":").map(Number);
-
-        return hours * 60 + minutes;
-      }
-
       scheduleSessions.push({
         element: sessionElement,
         weekday,
@@ -361,161 +507,64 @@ if (scheduleDays.length > 0) {
     });
   });
 
-  function getAstanaNow(date = new Date()) {
-    const parts = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Asia/Almaty",
-      weekday: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    }).formatToParts(date);
-
-    const values = {};
-
-    parts.forEach((part) => {
-      if (part.type !== "literal") {
-        values[part.type] = part.value;
-      }
-    });
-
-    const weekdays = {
-      Mon: 1,
-      Tue: 2,
-      Wed: 3,
-      Thu: 4,
-      Fri: 5,
-      Sat: 6,
-      Sun: 7,
-    };
-
-    return {
-      weekday: weekdays[values.weekday],
-      minutes:
-        Number(values.hour) * 60 +
-        Number(values.minute) +
-        Number(values.second) / 60,
-    };
-  }
-
-  function formatScheduleDuration(minutes) {
-    const language = getSiteLanguage();
-    const totalMinutes = Math.max(1, Math.ceil(minutes));
-
-    const days = Math.floor(totalMinutes / 1440);
-    const hours = Math.floor((totalMinutes % 1440) / 60);
-    const remainingMinutes = totalMinutes % 60;
-
-    const units =
-      language === "ru"
-        ? { day: "Д", hour: "Ч", minute: "М" }
-        : { day: "D", hour: "H", minute: "M" };
-
-    const parts = [];
-
-    if (days > 0) {
-      parts.push(`${days}${units.day}`);
-    }
-
-    if (hours > 0) {
-      parts.push(`${hours}${units.hour}`);
-    }
-
-    if (remainingMinutes > 0 || parts.length === 0) {
-      parts.push(`${remainingMinutes}${units.minute}`);
-    }
-
-    return parts.join(" · ");
-  }
-
-  function addScheduleStatus(session, type, minutes) {
-    const language = getSiteLanguage();
-
-    const labels =
-      language === "ru"
-        ? {
-            now: "СЕЙЧАС",
-            next: "ДАЛЬШЕ",
-            endsIn: "ДО КОНЦА",
-            startsIn: "НАЧАЛО ЧЕРЕЗ",
-          }
-        : {
-            now: "NOW",
-            next: "NEXT",
-            endsIn: "ENDS IN",
-            startsIn: "STARTS IN",
-          };
-
-    const statusElement = document.createElement("div");
-
-    statusElement.className = `class-status is-${type}`;
-
-    if (type === "now") {
-      statusElement.textContent =
-        `${labels.now} · ${labels.endsIn} ` + formatScheduleDuration(minutes);
-    } else {
-      statusElement.textContent =
-        `${labels.next} · ${labels.startsIn} ` +
-        formatScheduleDuration(minutes);
-    }
-
-    session.element.querySelector(".class-info")?.appendChild(statusElement);
-
-    session.element.classList.add(`is-${type}`);
-  }
-
-  function updateScheduleStatus(date = new Date()) {
-    const now = getAstanaNow(date);
-
-    let currentSession = null;
-    let nextSession = null;
-    let shortestWait = Infinity;
-
-    scheduleSessions.forEach((session) => {
-      session.element.classList.remove("is-now", "is-next");
-      session.element.querySelector(".class-status")?.remove();
-
-      if (
-        session.weekday === now.weekday &&
-        now.minutes >= session.start &&
-        now.minutes < session.end
-      ) {
-        currentSession = session;
-      }
-
-      let wait =
-        ((session.weekday - now.weekday + 7) % 7) * 1440 +
-        session.start -
-        now.minutes;
-
-      if (wait <= 0) {
-        wait += 7 * 1440;
-      }
-
-      if (wait < shortestWait) {
-        shortestWait = wait;
-        nextSession = session;
-      }
-    });
-
-    if (currentSession) {
-      addScheduleStatus(
-        currentSession,
-        "now",
-        currentSession.end - now.minutes,
-      );
-    }
-
-    if (nextSession) {
-      addScheduleStatus(nextSession, "next", shortestWait);
-    }
-  }
-
   scheduleStatusUpdater = updateScheduleStatus;
 
   updateScheduleStatus();
+}
 
-  setInterval(updateScheduleStatus, 30000);
+setInterval(() => {
+  if (scheduleStatusUpdater) {
+    scheduleStatusUpdater();
+  }
+}, 30000);
+
+const scheduleWeek = document.getElementById("scheduleWeek");
+
+if (scheduleWeek) {
+  const groupButtons = document.querySelectorAll(
+    ".group-switcher [data-group]",
+  );
+
+  function selectScheduleGroup(group, persist = true) {
+    if (!schedules[group]) {
+      return;
+    }
+
+    renderSchedule(group);
+
+    groupButtons.forEach((button) => {
+      const isActive = button.dataset.group === group;
+
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    if (persist) {
+      localStorage.setItem("scheduleGroup", group);
+    }
+
+    const timezone =
+      localStorage.getItem("scheduleTimezone") === "moscow"
+        ? "moscow"
+        : "astana";
+
+    applyScheduleTimezone(timezone);
+    rebuildScheduleStatus();
+  }
+
+  groupButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectScheduleGroup(button.dataset.group);
+
+      applyLanguage(getCurrentLanguage());
+    });
+  });
+
+  const savedGroup = localStorage.getItem("scheduleGroup");
+
+  const initialGroup = savedGroup && schedules[savedGroup] ? savedGroup : "263";
+
+  selectScheduleGroup(initialGroup, false);
 }
 
 const currentDateElement = document.getElementById("currentDate");

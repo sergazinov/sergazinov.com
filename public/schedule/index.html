@@ -148,9 +148,20 @@
             aria-label="Select group"
             data-i18n-aria-label="schedule.groupLabel"
           >
-            <button type="button">261</button>
-            <button type="button">262</button>
-            <button type="button" class="active">263</button>
+            <button type="button" data-group="261" aria-pressed="false">
+              261
+            </button>
+            <button type="button" data-group="262" aria-pressed="false">
+              262
+            </button>
+            <button
+              type="button"
+              data-group="263"
+              class="active"
+              aria-pressed="true"
+            >
+              263
+            </button>
           </div>
 
           <section class="schedule-week" id="scheduleWeek"></section>
