@@ -269,7 +269,13 @@ $deadlines = getPublishedDeadlines($pdo);
 
                             <?php else: ?>
 
-                                <h2 class="deadline-title">
+                                <h2
+                                    class="deadline-title"
+                                    data-homework-title="<?= htmlspecialchars(
+                                                                $deadline['title'],
+                                                                ENT_QUOTES,
+                                                                'UTF-8'
+                                                            ) ?>">
                                     <?= htmlspecialchars(
                                         $deadline['title'],
                                         ENT_QUOTES,
