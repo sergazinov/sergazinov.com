@@ -936,6 +936,33 @@ setInterval(() => {
   }
 }, 30000);
 
+const validGroups = ["261", "262", "263"];
+
+function getSelectedGroup() {
+  const selectedGroup = localStorage.getItem("selectedGroup");
+
+  if (validGroups.includes(selectedGroup)) {
+    return selectedGroup;
+  }
+
+  const legacyScheduleGroup = localStorage.getItem("scheduleGroup");
+
+  if (validGroups.includes(legacyScheduleGroup)) {
+    localStorage.setItem("selectedGroup", legacyScheduleGroup);
+    return legacyScheduleGroup;
+  }
+
+  return "263";
+}
+
+function saveSelectedGroup(group) {
+  if (!validGroups.includes(group)) {
+    return;
+  }
+
+  localStorage.setItem("selectedGroup", group);
+}
+
 const scheduleWeek = document.getElementById("scheduleWeek");
 
 if (scheduleWeek) {
@@ -958,7 +985,7 @@ if (scheduleWeek) {
     });
 
     if (persist) {
-      localStorage.setItem("scheduleGroup", group);
+      saveSelectedGroup(group);
     }
 
     const timezone =
@@ -978,9 +1005,9 @@ if (scheduleWeek) {
     });
   });
 
-  const savedGroup = localStorage.getItem("scheduleGroup");
+  const savedGroup = getSelectedGroup();
 
-  const initialGroup = savedGroup && schedules[savedGroup] ? savedGroup : "263";
+  const initialGroup = schedules[savedGroup] ? savedGroup : "263";
 
   selectScheduleGroup(initialGroup, false);
 }
@@ -1046,6 +1073,59 @@ if (currentDateElement && currentTimeElement && currentTimezoneElement) {
   }
 
   runClock();
+}
+
+const deadlinesList = document.querySelector(".deadlines-list");
+
+if (deadlinesList) {
+  const deadlineGroupButtons = document.querySelectorAll(
+    ".group-switcher [data-group]",
+  );
+
+  const deadlineCards = document.querySelectorAll(".deadline-card[data-group]");
+
+  const deadlinesEmpty = document.getElementById("deadlinesEmpty");
+
+  function selectDeadlineGroup(group, persist = true) {
+    if (!validGroups.includes(group)) {
+      return;
+    }
+
+    let visibleCount = 0;
+
+    deadlineCards.forEach((card) => {
+      const isVisible = card.dataset.group === group;
+
+      card.hidden = !isVisible;
+
+      if (isVisible) {
+        visibleCount += 1;
+      }
+    });
+
+    deadlineGroupButtons.forEach((button) => {
+      const isActive = button.dataset.group === group;
+
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    if (deadlinesEmpty) {
+      deadlinesEmpty.hidden = visibleCount !== 0;
+    }
+
+    if (persist) {
+      saveSelectedGroup(group);
+    }
+  }
+
+  deadlineGroupButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectDeadlineGroup(button.dataset.group);
+    });
+  });
+
+  selectDeadlineGroup(getSelectedGroup(), false);
 }
 
 const deadlineElements = document.querySelectorAll("[data-deadline]");

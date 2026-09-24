@@ -10,6 +10,7 @@ function getPublishedDeadlines(PDO $pdo): array
     $sql = '
         SELECT
             deadlines.id,
+            deadlines.group_code,
             deadlines.title,
             deadlines.description,
             deadlines.due_at_utc,
