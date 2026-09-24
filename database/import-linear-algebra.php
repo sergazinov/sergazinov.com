@@ -49,6 +49,7 @@ $weeks = $importer->parseWeeks($content);
 $upsert = $pdo->prepare(
     'INSERT INTO deadlines (
         course_id,
+        group_code,
         title,
         description,
         due_at_utc,
@@ -61,6 +62,7 @@ $upsert = $pdo->prepare(
         last_seen_at
     ) VALUES (
         :course_id,
+        :group_code,
         :title,
         :description,
         :due_at_utc,
@@ -75,6 +77,7 @@ $upsert = $pdo->prepare(
     ON CONFLICT(source_type, external_id)
     DO UPDATE SET
         course_id = excluded.course_id,
+        group_code = excluded.group_code,
         title = excluded.title,
         description = excluded.description,
         due_at_utc = excluded.due_at_utc,
@@ -115,6 +118,7 @@ foreach ($weeks as $week) {
 
     $upsert->execute([
         'course_id' => $courseId,
+        'group_code' => '263',
         'title' => 'Homework ' . $weekNumber,
         'description' => $week['topic'],
         'due_at_utc' => $deadlineUtc->format(

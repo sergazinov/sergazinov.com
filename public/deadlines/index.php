@@ -168,147 +168,176 @@ $deadlines = getPublishedDeadlines($pdo);
 
                 </div>
 
+                <div
+                    class="group-switcher"
+                    role="group"
+                    aria-label="Group">
+
+                    <button
+                        type="button"
+                        data-group="261"
+                        aria-pressed="false">
+                        261
+                    </button>
+
+                    <button
+                        type="button"
+                        data-group="262"
+                        aria-pressed="false">
+                        262
+                    </button>
+
+                    <button
+                        type="button"
+                        data-group="263"
+                        class="active"
+                        aria-pressed="true">
+                        263
+                    </button>
+
+                </div>
 
                 <section class="deadlines-list">
 
-                    <?php if ($deadlines === []): ?>
+                    <div
+                        class="deadlines-empty"
+                        id="deadlinesEmpty"
+                        hidden>
 
-                        <div class="deadlines-empty">
+                        <p
+                            class="deadlines-empty-title"
+                            data-i18n="deadlines.emptyTitle">
+                            No deadlines yet.
+                        </p>
 
-                            <p
-                                class="deadlines-empty-title"
-                                data-i18n="deadlines.emptyTitle">
-                                No deadlines yet.
-                            </p>
+                        <p
+                            class="deadlines-empty-text"
+                            data-i18n="deadlines.emptyText">
+                            Upcoming deadlines will appear here.
+                        </p>
 
-                            <p
-                                class="deadlines-empty-text"
-                                data-i18n="deadlines.emptyText">
-                                Upcoming deadlines will appear here.
-                            </p>
+                    </div>
 
-                        </div>
+                    <?php foreach ($deadlines as $deadline): ?>
 
-                    <?php else: ?>
+                        <article
+                            class="deadline-card"
+                            data-group="<?= htmlspecialchars(
+                                            $deadline['group_code'] ?? '',
+                                            ENT_QUOTES,
+                                            'UTF-8'
+                                        ) ?>">
 
-                        <?php foreach ($deadlines as $deadline): ?>
+                            <div
+                                class="deadline-course"
+                                data-i18n-course="<?= htmlspecialchars(
+                                                        $deadline['course_slug'],
+                                                        ENT_QUOTES,
+                                                        'UTF-8'
+                                                    ) ?>">
+                                <?= htmlspecialchars(
+                                    $deadline['course_short_name']
+                                        ?: $deadline['course_name'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </div>
 
-                            <article class="deadline-card">
+                            <?php if (!empty($deadline['description'])): ?>
+
+                                <h2 class="deadline-title">
+                                    <?= htmlspecialchars(
+                                        $deadline['description'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ) ?>
+                                </h2>
 
                                 <div
-                                    class="deadline-course"
-                                    data-i18n-course="<?= htmlspecialchars(
-                                                            $deadline['course_slug'],
-                                                            ENT_QUOTES,
-                                                            'UTF-8'
-                                                        ) ?>">
+                                    class="deadline-homework-number"
+                                    data-homework-title="<?= htmlspecialchars(
+                                                                $deadline['title'],
+                                                                ENT_QUOTES,
+                                                                'UTF-8'
+                                                            ) ?>">
                                     <?= htmlspecialchars(
-                                        $deadline['course_short_name']
-                                            ?: $deadline['course_name'],
+                                        $deadline['title'],
                                         ENT_QUOTES,
                                         'UTF-8'
                                     ) ?>
                                 </div>
 
-                                <?php if (!empty($deadline['description'])): ?>
+                            <?php else: ?>
 
-                                    <h2 class="deadline-title">
-                                        <?= htmlspecialchars(
-                                            $deadline['description'],
-                                            ENT_QUOTES,
-                                            'UTF-8'
-                                        ) ?>
-                                    </h2>
+                                <h2 class="deadline-title">
+                                    <?= htmlspecialchars(
+                                        $deadline['title'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ) ?>
+                                </h2>
 
-                                    <div
-                                        class="deadline-homework-number"
-                                        data-homework-title="<?= htmlspecialchars(
-                                                                    $deadline['title'],
-                                                                    ENT_QUOTES,
-                                                                    'UTF-8'
-                                                                ) ?>">
-                                        <?= htmlspecialchars(
-                                            $deadline['title'],
-                                            ENT_QUOTES,
-                                            'UTF-8'
-                                        ) ?>
-                                    </div>
+                            <?php endif; ?>
 
-                                <?php else: ?>
-
-                                    <h2 class="deadline-title">
-                                        <?= htmlspecialchars(
-                                            $deadline['title'],
-                                            ENT_QUOTES,
-                                            'UTF-8'
-                                        ) ?>
-                                    </h2>
-
-                                <?php endif; ?>
-
+                            <div
+                                class="deadline-meta"
+                                data-deadline
+                                data-due-at="<?= htmlspecialchars(
+                                                    $deadline['due_at_utc'],
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                ) ?>">
 
                                 <div
-                                    class="deadline-meta"
-                                    data-deadline
-                                    data-due-at="<?= htmlspecialchars(
-                                                        $deadline['due_at_utc'],
-                                                        ENT_QUOTES,
-                                                        'UTF-8'
-                                                    ) ?>">
+                                    class="deadline-date-label"
+                                    data-i18n="deadlines.deadlineLabel">
+                                    Deadline
+                                </div>
 
-                                    <div
-                                        class="deadline-date-label"
-                                        data-i18n="deadlines.deadlineLabel">
-                                        Deadline
-                                    </div>
+                                <time
+                                    class="deadline-time"
+                                    datetime="<?= htmlspecialchars(
+                                                    $deadline['due_at_utc'],
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                ) ?>">
+                                    —
+                                </time>
 
-                                    <time
-                                        class="deadline-time"
-                                        datetime="<?= htmlspecialchars(
-                                                        $deadline['due_at_utc'],
-                                                        ENT_QUOTES,
-                                                        'UTF-8'
-                                                    ) ?>">
+                                <div class="deadline-countdown">
+
+                                    <span class="deadline-countdown-label">
+                                        Due in
+                                    </span>
+
+                                    <strong class="deadline-countdown-value">
                                         —
-                                    </time>
-
-
-                                    <div class="deadline-countdown">
-
-                                        <span class="deadline-countdown-label">
-                                            Due in
-                                        </span>
-
-                                        <strong class="deadline-countdown-value">
-                                            —
-                                        </strong>
-
-                                    </div>
+                                    </strong>
 
                                 </div>
 
-                                <?php if (!empty($deadline['assignment_url'])): ?>
+                            </div>
 
-                                    <a
-                                        class="deadline-assignment-link"
-                                        href="<?= htmlspecialchars(
-                                                    $deadline['assignment_url'],
-                                                    ENT_QUOTES,
-                                                    'UTF-8'
-                                                ) ?>"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        data-i18n="deadlines.openAssignment">
-                                        Open assignment
-                                    </a>
+                            <?php if (!empty($deadline['assignment_url'])): ?>
 
-                                <?php endif; ?>
+                                <a
+                                    class="deadline-assignment-link"
+                                    href="<?= htmlspecialchars(
+                                                $deadline['assignment_url'],
+                                                ENT_QUOTES,
+                                                'UTF-8'
+                                            ) ?>"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    data-i18n="deadlines.openAssignment">
+                                    Open assignment
+                                </a>
 
-                            </article>
+                            <?php endif; ?>
 
-                        <?php endforeach; ?>
+                        </article>
 
-                    <?php endif; ?>
+                    <?php endforeach; ?>
 
                 </section>
 

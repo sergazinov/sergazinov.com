@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS deadlines (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
     course_id INTEGER NOT NULL,
+    group_code TEXT,
 
     title TEXT NOT NULL,
     description TEXT,
@@ -52,3 +53,6 @@ CREATE INDEX IF NOT EXISTS idx_deadlines_published_due
 
 CREATE UNIQUE INDEX IF NOT EXISTS idx_deadlines_source_external
     ON deadlines(source_type, external_id);
+
+CREATE INDEX IF NOT EXISTS idx_deadlines_group_published_due
+    ON deadlines(group_code, is_published, due_at_utc);
