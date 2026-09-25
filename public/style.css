@@ -272,7 +272,7 @@ html[lang="ru"] .hero-title {
 
 /* ---------- TABLET ---------- */
 
-@media (max-width: 900px) {
+@media (max-width: 920px) {
   .page-shell {
     width: min(100% - 40px, var(--max-width));
   }
@@ -654,10 +654,33 @@ html[lang="ru"] .hero-title {
 }
 
 /* =========================================================
+   INNER PAGE HEADER — NARROW DESKTOP
+   ========================================================= */
+
+@media (min-width: 930px) and (max-width: 1100px) {
+  .page-heading > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .page-controls {
+    flex: 0 0 auto;
+  }
+
+  .current-clock {
+    flex: 0 0 auto;
+  }
+
+  .current-clock-date {
+    white-space: nowrap;
+  }
+}
+
+/* =========================================================
    SCHEDULE — TABLET
    ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 929px) {
   .inner-main {
     padding: 42px 0 54px;
   }
